@@ -2,27 +2,39 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ServiceRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ServiceRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        if (request()->routeIs('services.store')) {
+            $name = new ServiceRule(request()->company_id, null);
+        } elseif (request()->routeIs('services.update')) {
+            $name = new ServiceRule(request()->company_id, $this->route('service')->id);
+        }
+
         return [
-            //
+            'name' => ['required', 'min:3', $name],
+            'ticket' => ['required', 'min:3'],
+            'image' => ['nullable', 'image'],
+            'company_id' => ['required', 'exists:companies,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nombre',
+            'ticket' => 'nombre boleta',
+            'image' => 'imagen',
+            'company_id' => 'empresa',
         ];
     }
 }

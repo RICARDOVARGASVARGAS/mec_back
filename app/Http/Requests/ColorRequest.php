@@ -2,27 +2,37 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ColorRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ColorRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        if (request()->routeIs('colors.store')) {
+            $name = new ColorRule(request()->company_id, null);
+        } elseif (request()->routeIs('colors.update')) {
+            $name = new ColorRule(request()->company_id, $this->route('color')->id);
+        }
+
         return [
-            //
+            'name' => ['required', $name],
+            'hex' => ['required'],
+            'company_id' => ['required', 'exists:companies,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nombre',
+            'hex' => 'color',
+            'company_id' => 'empresa',
         ];
     }
 }

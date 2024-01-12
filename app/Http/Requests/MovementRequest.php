@@ -6,23 +6,30 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MovementRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'amount' => ['required', 'numeric'],
+            'detail' => ['required'],
+            'date_movement' => ['required', 'date'],
+            'client_id' => ['nullable', 'exists:clients,id'],
+            'box_id' => ['required', 'exists:boxes,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'amount' => 'monto',
+            'detail' => 'detalle',
+            'date_movement' => 'fecha',
+            'client_id' => 'cliente',
+            'box_id' => 'caja',
         ];
     }
 }

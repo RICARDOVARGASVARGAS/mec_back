@@ -2,27 +2,38 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\BoxRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BoxRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
+
     public function rules(): array
     {
+        if (request()->routeIs('boxes.store')) {
+            $name = new BoxRule(request()->company_id, null);
+        } elseif (request()->routeIs('boxes.update')) {
+            $name = new BoxRule(request()->company_id, $this->route('box')->id);
+        }
+
         return [
-            //
+            'name' => ['required', 'min:3', $name],
+            'image' => ['nullable', 'image'],
+            'company_id' => ['required', 'exists:companies,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name' => 'nombre',
+            'image' => 'imagen',
+            'company_id' => 'empresa',
         ];
     }
 }

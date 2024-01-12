@@ -6,23 +6,36 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
+        if (request()->routeIs('users.store')) {
+            $email = 'unique:users,email';
+        } elseif (request()->routeIs('users.update')) {
+            $email = 'unique:users,email,' . request()->route('user')->id;
+        }
+
         return [
-            //
+            'names' => ['required', 'string'],
+            'surnames' => ['required', 'string'],
+            'phone' => ['required', 'string'],
+            'email' => ['required', 'email', $email],
+            'company_id' => ['required', 'exists:companies,id'],
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'names' => 'nombres',
+            'surnames' => 'apellidos',
+            'phone' => 'teléfono',
+            'email' => 'correo electrónico',
+            'company_id' => 'empresa',
         ];
     }
 }
