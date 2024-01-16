@@ -7,13 +7,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CompanyResource extends JsonResource
 {
-    /**
-     * Transform the resource into an array.
-     *
-     * @return array<string, mixed>
-     */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return array_merge(parent::toArray($request), [
+            'storage' => $this->image ? 'storage/' . $this->image : null,
+        ]);
     }
+
+    // public function with($request)
+    // {
+    //     return [
+    //         'storage' => $this->image ? 'storage/' . $this->image : null,
+    //     ];
+    // }
 }

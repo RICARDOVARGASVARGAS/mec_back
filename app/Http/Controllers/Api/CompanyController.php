@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Hash;
 
 class CompanyController extends Controller
 {
+    // Obtener datos de la Empresa
+    function getCompany(Company $company)
+    {
+        return CompanyResource::make($company);
+    }
+
     // Registrar la Empresa
     function registerCompany(Request $request)
     {
