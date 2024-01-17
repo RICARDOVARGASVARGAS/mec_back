@@ -13,23 +13,33 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    function index(Request $request)
+    function getUsers(Request $request)
     {
-        $items = User::with(['permissions', 'company'])->where('company_id', $request->company_id)
-            ->where('visible', 'public')
+
+        $request->validate([
+            'search' => 'nullable',
+            'perPage' => 'nullable|numeric',
+            'company' => 'required|exists:companies,id'
+        ], [], [
+            'search' => 'Búsqueda',
+            'perPage' => 'Registros por página',
+            'company' => 'Mecánica'
+        ]);
+
+        $items = User::with(['company'])->where('company_id', $request->company)
             ->where(function ($query) use ($request) {
                 $query->where('names', 'like', '%' . $request->search . '%')
                     ->orWhere('surnames', 'like', '%' . $request->search . '%')
                     ->orWhere('phone', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
+            })
+            ->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
-
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
         return UserResource::collection($items);
     }
 
-    function store(UserRequest $request)
+    function registerUser(UserRequest $request)
     {
         $item = User::create([
             'names' => $request->names,
@@ -37,21 +47,22 @@ class UserController extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'status' => 'active',
-            'password' => bcrypt('mecweb'),
+            'role' => 'user',
+            'password' => bcrypt('MECSystem'),
             'company_id' => $request->company_id
         ]);
 
         return UserResource::make($item)->additional([
-            'message' => 'Usuario Registrado.'
+            'message' => 'Administrador Registrado.'
         ]);
     }
 
-    function show(User $user)
+    function getUser(User $user)
     {
         return UserResource::make($user);
     }
 
-    function update(UserRequest $request, User $user)
+    function updateUser(UserRequest $request, User $user)
     {
         $user->update([
             'names' => $request->names,
@@ -63,25 +74,25 @@ class UserController extends Controller
         ]);
 
         return UserResource::make($user)->additional([
-            'message' => 'Usuario Actualizado.'
+            'message' => 'Administrador Actualizado.'
         ]);
     }
 
-    function destroy(User $user)
+    function deleteUser(User $user)
     {
         $user->delete();
         if ($user->image) {
             Storage::delete($user->image);
         }
         return UserResource::make($user)->additional([
-            'message' => 'Usuario Eliminado.'
+            'message' => 'Administrador Eliminado.'
         ]);
     }
 
     function resetPassword(User $user)
     {
         $user->update([
-            'password' => bcrypt('mecweb')
+            'password' => bcrypt('MECSystem')
         ]);
 
         return UserResource::make($user)->additional([
