@@ -6,7 +6,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\ModuleResource;
 use App\Http\Resources\UserResource;
+use App\Models\Module;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -57,8 +59,9 @@ class UserController extends Controller
         ]);
     }
 
-    function getUser(User $user)
+    function getUser($user)
     {
+        $user = User::included()->find($user);
         return UserResource::make($user);
     }
 
@@ -114,11 +117,22 @@ class UserController extends Controller
     function updatePermission(Request $request)
     {
         $user = User::find($request->user_id);
-        $user->permissions()->sync(explode(",", $request->permissions));
+        if ($request->permissions == null) {
+            $user->permissions()->detach();
+        } else {
+            $user->permissions()->sync(explode(",", $request->permissions));
+        }
+
         return response()->json([
             'user' => $user,
             'permissions' => $request->permissions,
             'message' => 'Permisos actualizados correctamente'
         ]);
+    }
+
+    function getModules()
+    {
+        $items = Module::with(['permissions'])->get();
+        return ModuleResource::collection($items);
     }
 }

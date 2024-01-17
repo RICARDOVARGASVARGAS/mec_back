@@ -11,3 +11,4 @@ Route::delete('deleteUser/{user}', [UserController::class, 'deleteUser'])->name(
 Route::post('resetPassword/{user}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
 Route::post('changePassword/{user}', [UserController::class, 'changePassword'])->name('users.changePassword');
 Route::post('updatePermission', [UserController::class, 'updatePermission'])->name('users.updatePermission');
+Route::get('getModules', [UserController::class, 'getModules'])->name('getModules');
