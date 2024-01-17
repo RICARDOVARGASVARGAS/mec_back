@@ -24,6 +24,7 @@ class UserRequest extends FormRequest
             'surnames' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'email' => ['required', 'email', $email],
+            'status' => ['required', 'in:active,inactive'],
             'company_id' => ['required', 'exists:companies,id'],
         ];
     }
@@ -31,11 +32,12 @@ class UserRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'names' => 'nombres',
-            'surnames' => 'apellidos',
-            'phone' => 'teléfono',
-            'email' => 'correo electrónico',
-            'company_id' => 'empresa',
+            'names' => 'Nombres',
+            'surnames' => 'Apellidos',
+            'phone' => 'Teléfono',
+            'email' => 'Correo Electrónico',
+            'company_id' => 'Mecánica',
+            'status' => 'Estado',
         ];
     }
 }
