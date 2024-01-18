@@ -10,19 +10,25 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    function index(Request $request)
+    function getBrands(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica']);
+
         $items = Brand::where('company_id', $request->company_id)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return BrandResource::collection($items);
     }
 
-    function store(BrandRequest $request)
+    function registerBrand(BrandRequest $request)
     {
         $item = Brand::create([
             'name' => $request->name,
@@ -34,12 +40,14 @@ class BrandController extends Controller
         ]);
     }
 
-    function show(Brand $brand)
+    function getBrand($brand)
     {
+        $brand = Brand::included()->find($brand);
         return BrandResource::make($brand);
     }
 
-    function update(BrandRequest $request, Brand $brand)
+
+    function updateBrand(BrandRequest $request, Brand $brand)
     {
         $brand->update([
             'name' => $request->name,
@@ -51,7 +59,7 @@ class BrandController extends Controller
         ]);
     }
 
-    function destroy(Brand $brand)
+    function deleteBrand(Brand $brand)
     {
         $brand->delete();
 

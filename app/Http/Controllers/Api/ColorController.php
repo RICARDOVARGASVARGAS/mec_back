@@ -10,24 +10,28 @@ use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
-    function index(Request $request)
+    function getColors(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica']);
+
         $items = Color::where('company_id', $request->company_id)
             ->where(function ($query) use ($request) {
-                $query->where('name', 'like', '%' . $request->search . '%')
-                    ->orWhere('hex', 'like', '%' . $request->search . '%');
+                $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return ColorResource::collection($items);
     }
 
-    function store(ColorRequest $request)
+    function registerColor(ColorRequest $request)
     {
         $item = Color::create([
             'name' => $request->name,
-            'hex' => $request->hex,
             'company_id' => $request->company_id
         ]);
 
@@ -36,16 +40,17 @@ class ColorController extends Controller
         ]);
     }
 
-    function show(Color $color)
+    function getColor($color)
     {
+        $color = Color::included()->find($color);
         return ColorResource::make($color);
     }
 
-    function update(ColorRequest $request, Color $color)
+
+    function updateColor(ColorRequest $request, Color $color)
     {
         $color->update([
             'name' => $request->name,
-            'hex' => $request->hex,
             'company_id' => $request->company_id
         ]);
 
@@ -54,7 +59,7 @@ class ColorController extends Controller
         ]);
     }
 
-    function destroy(Color $color)
+    function deleteColor(Color $color)
     {
         $color->delete();
 

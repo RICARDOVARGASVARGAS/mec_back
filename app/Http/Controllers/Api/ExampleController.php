@@ -10,19 +10,25 @@ use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
-    function index(Request $request)
+    function getExamples(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica']);
+
         $items = Example::where('company_id', $request->company_id)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return ExampleResource::collection($items);
     }
 
-    function store(ExampleRequest $request)
+    function registerExample(ExampleRequest $request)
     {
         $item = Example::create([
             'name' => $request->name,
@@ -34,12 +40,14 @@ class ExampleController extends Controller
         ]);
     }
 
-    function show(Example $example)
+    function getExample($example)
     {
+        $example = Example::included()->find($example);
         return ExampleResource::make($example);
     }
 
-    function update(ExampleRequest $request, Example $example)
+
+    function updateExample(ExampleRequest $request, Example $example)
     {
         $example->update([
             'name' => $request->name,
@@ -51,7 +59,7 @@ class ExampleController extends Controller
         ]);
     }
 
-    function destroy(Example $example)
+    function deleteExample(Example $example)
     {
         $example->delete();
 

@@ -10,19 +10,25 @@ use Illuminate\Http\Request;
 
 class YearController extends Controller
 {
-    function index(Request $request)
+    function getYears(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica']);
+
         $items = Year::where('company_id', $request->company_id)
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return YearResource::collection($items);
     }
 
-    function store(YearRequest $request)
+    function registerYear(YearRequest $request)
     {
         $item = Year::create([
             'name' => $request->name,
@@ -34,12 +40,14 @@ class YearController extends Controller
         ]);
     }
 
-    function show(Year $year)
+    function getYear($year)
     {
+        $year = Year::included()->find($year);
         return YearResource::make($year);
     }
 
-    function update(YearRequest $request, Year $year)
+
+    function updateYear(YearRequest $request, Year $year)
     {
         $year->update([
             'name' => $request->name,
@@ -51,7 +59,7 @@ class YearController extends Controller
         ]);
     }
 
-    function destroy(Year $year)
+    function deleteYear(Year $year)
     {
         $year->delete();
 
