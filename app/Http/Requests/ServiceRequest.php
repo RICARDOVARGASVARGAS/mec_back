@@ -14,9 +14,9 @@ class ServiceRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('services.store')) {
+        if (request()->routeIs('registerService')) {
             $name = new ServiceRule(request()->company_id, null);
-        } elseif (request()->routeIs('services.update')) {
+        } elseif (request()->routeIs('updateService')) {
             $name = new ServiceRule(request()->company_id, $this->route('service')->id);
         }
 
@@ -31,10 +31,10 @@ class ServiceRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
-            'ticket' => 'nombre boleta',
+            'name' => 'Servicio',
+            'ticket' => 'Boleta',
             'image' => 'imagen',
-            'company_id' => 'empresa',
+            'company_id' => 'Mecánica',
         ];
     }
 }

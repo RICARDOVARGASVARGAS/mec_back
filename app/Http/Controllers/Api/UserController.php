@@ -11,6 +11,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Module;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -29,6 +30,7 @@ class UserController extends Controller
         ]);
 
         $items = User::with(['company'])->where('company_id', $request->company)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('names', 'like', '%' . $request->search . '%')
                     ->orWhere('surnames', 'like', '%' . $request->search . '%')
@@ -83,13 +85,21 @@ class UserController extends Controller
 
     function deleteUser(User $user)
     {
-        $user->delete();
-        if ($user->image) {
-            Storage::delete($user->image);
+        try {
+            $image = $user->image;
+            DB::beginTransaction();
+            $user->delete();
+            DB::commit();
+            if ($image) {
+                Storage::delete($image);
+            }
+            return UserResource::make($user);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
-        return UserResource::make($user)->additional([
-            'message' => 'Administrador Eliminado.'
-        ]);
     }
 
     function resetPassword(User $user)

@@ -7,24 +7,32 @@ use App\Http\Requests\ServiceRequest;
 use App\Http\Resources\ServiceResource;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-    function index(Request $request)
+    function getServices(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
+
         $items = Service::where('company_id', $request->company_id)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('ticket', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return ServiceResource::collection($items);
     }
 
-    function store(ServiceRequest $request)
+    function registerService(ServiceRequest $request)
     {
         $item = Service::create([
             'name' => $request->name,
@@ -37,12 +45,13 @@ class ServiceController extends Controller
         ]);
     }
 
-    function show(Service $service)
+    function getService($service)
     {
+        $service = Service::included()->find($service);
         return ServiceResource::make($service);
     }
 
-    function update(ServiceRequest $request, Service $service)
+    function updateService(ServiceRequest $request, Service $service)
     {
         $service->update([
             'name' => $request->name,
@@ -55,14 +64,22 @@ class ServiceController extends Controller
         ]);
     }
 
-    function destroy(Service $service)
+    function deleteService(Service $service)
     {
-        $service->delete();
-        if ($service->image) {
-            Storage::delete($service->image);
+        try {
+            $image = $service->image;
+            DB::beginTransaction();
+            $service->delete();
+            DB::commit();
+            if ($image) {
+                Storage::delete($image);
+            }
+            return ServiceResource::make($service);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
-        return ServiceResource::make($service)->additional([
-            'message' => 'Servicio Eliminado.'
-        ]);
     }
 }

@@ -2,16 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\QueryTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, QueryTrait;
 
     protected $fillable = [
         'name', 'ticket', 'price_buy', 'price_sell', 'image', 'company_id',
     ];
+
+    protected $allowFilter = ['name', 'ticket', 'price_buy', 'price_sell'];
+    protected $allowSort = ['name', 'ticket', 'price_buy', 'price_sell'];
+    protected $allowIncluded = ['company'];
+
 
     function company()
     {

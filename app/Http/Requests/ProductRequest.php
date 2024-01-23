@@ -14,9 +14,9 @@ class ProductRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('products.store')) {
+        if (request()->routeIs('registerProduct')) {
             $name = new ProductRule(request()->company_id, null);
-        } elseif (request()->routeIs('products.update')) {
+        } elseif (request()->routeIs('updateProduct')) {
             $name = new ProductRule(request()->company_id, $this->route('product')->id);
         }
 
@@ -33,12 +33,12 @@ class ProductRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
-            'ticket' => 'nombre boleta',
-            'price_buy' => 'precio de compra',
-            'price_sell' => 'precio de venta',
-            'image' => 'imagen',
-            'company_id' => 'empresa',
+            'name' => 'Producto',
+            'ticket' => 'Nombre Boleta',
+            'price_buy' => 'Precio de Compra',
+            'price_sell' => 'Precio de Venta',
+            'image' => 'Imagen',
+            'company_id' => 'Mecánica',
         ];
     }
 }

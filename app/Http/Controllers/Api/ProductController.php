@@ -12,9 +12,16 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    function index(Request $request)
+    function getProducts(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
+
         $items = Product::where('company_id', $request->company_id)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%')
                     ->orWhere('ticket', 'like', '%' . $request->search . '%')
@@ -22,12 +29,12 @@ class ProductController extends Controller
                     ->orWhere('price_sell', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return ProductResource::collection($items);
     }
 
-    function store(ProductRequest $request)
+    function registerProduct(ProductRequest $request)
     {
         $item = Product::create([
             'name' => $request->name,
@@ -42,12 +49,13 @@ class ProductController extends Controller
         ]);
     }
 
-    function show(Product $product)
+    function getProduct($product)
     {
+        $product = Product::included()->find($product);
         return ProductResource::make($product);
     }
 
-    function update(ProductRequest $request, Product $product)
+    function updateProduct(ProductRequest $request, Product $product)
     {
         $product->update([
             'name' => $request->name,
@@ -62,14 +70,22 @@ class ProductController extends Controller
         ]);
     }
 
-    function destroy(Product $product)
+    function deleteProduct(Product $product)
     {
-        $product->delete();
-        if ($product->image) {
-            Storage::delete($product->image);
+        try {
+            $image = $product->image;
+            DB::beginTransaction();
+            $product->delete();
+            DB::commit();
+            if ($image) {
+                Storage::delete($image);
+            }
+            return ProductResource::make($product);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
-        return ProductResource::make($product)->additional([
-            'message' => 'Producto Eliminado.'
-        ]);
     }
 }

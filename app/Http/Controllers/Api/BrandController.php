@@ -19,6 +19,7 @@ class BrandController extends Controller
         ], [], ['company_id' => 'Mecánica']);
 
         $items = Brand::where('company_id', $request->company_id)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');

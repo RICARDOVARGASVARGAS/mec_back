@@ -4,6 +4,8 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\ExampleController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\YearController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +33,15 @@ Route::post('getYear/{year}', [YearController::class, 'getYear'])->name('getYear
 Route::post('registerYear', [YearController::class, 'registerYear'])->name('registerYear');
 Route::post('updateYear/{year}', [YearController::class, 'updateYear'])->name('updateYear');
 Route::delete('deleteYear/{year}', [YearController::class, 'deleteYear'])->name('deleteYear');
+
+Route::post('getProducts', [ProductController::class, 'getProducts'])->name('getProducts');
+Route::post('getProduct/{product}', [ProductController::class, 'getProduct'])->name('getProduct');
+Route::post('registerProduct', [ProductController::class, 'registerProduct'])->name('registerProduct');
+Route::post('updateProduct/{product}', [ProductController::class, 'updateProduct'])->name('updateProduct');
+Route::delete('deleteProduct/{product}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+
+Route::post('getServices', [ServiceController::class, 'getServices'])->name('getServices');
+Route::post('getService/{service}', [ServiceController::class, 'getService'])->name('getService');
+Route::post('registerService', [ServiceController::class, 'registerService'])->name('registerService');
+Route::post('updateService/{service}', [ServiceController::class, 'updateService'])->name('updateService');
+Route::delete('deleteService/{service}', [ServiceController::class, 'deleteService'])->name('deleteService');

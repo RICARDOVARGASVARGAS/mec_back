@@ -19,6 +19,7 @@ class YearController extends Controller
         ], [], ['company_id' => 'Mecánica']);
 
         $items = Year::where('company_id', $request->company_id)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
