@@ -21,6 +21,7 @@ class BoxController extends Controller
         ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
 
         $items = Box::where('company_id', $request->company_id)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
@@ -34,11 +35,12 @@ class BoxController extends Controller
     {
         $item = Box::create([
             'name' => $request->name,
+            'ticket' => $request->ticket,
             'company_id' => $request->company_id
         ]);
 
         return BoxResource::make($item)->additional([
-            'message' => 'Caja Registrada.'
+            'message' => 'Servicio Registrado.'
         ]);
     }
 
@@ -52,11 +54,12 @@ class BoxController extends Controller
     {
         $box->update([
             'name' => $request->name,
+            'ticket' => $request->ticket,
             'company_id' => $request->company_id
         ]);
 
         return BoxResource::make($box)->additional([
-            'message' => 'Caja Actualizada.'
+            'message' => 'Servicio Actualizado.'
         ]);
     }
 

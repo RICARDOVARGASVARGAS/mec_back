@@ -15,9 +15,9 @@ class BoxRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('boxes.store')) {
+        if (request()->routeIs('registerBox')) {
             $name = new BoxRule(request()->company_id, null);
-        } elseif (request()->routeIs('boxes.update')) {
+        } elseif (request()->routeIs('updateBox')) {
             $name = new BoxRule(request()->company_id, $this->route('box')->id);
         }
 

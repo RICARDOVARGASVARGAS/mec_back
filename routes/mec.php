@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BoxController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\ExampleController;
@@ -45,3 +46,9 @@ Route::post('getService/{service}', [ServiceController::class, 'getService'])->n
 Route::post('registerService', [ServiceController::class, 'registerService'])->name('registerService');
 Route::post('updateService/{service}', [ServiceController::class, 'updateService'])->name('updateService');
 Route::delete('deleteService/{service}', [ServiceController::class, 'deleteService'])->name('deleteService');
+
+Route::post('getBoxes', [BoxController::class, 'getBoxes'])->name('getBoxes');
+Route::post('getBox/{box}', [BoxController::class, 'getBox'])->name('getBox');
+Route::post('registerBox', [BoxController::class, 'registerBox'])->name('registerBox');
+Route::post('updateBox/{box}', [BoxController::class, 'updateBox'])->name('updateBox');
+Route::delete('deleteBox/{box}', [BoxController::class, 'deleteBox'])->name('deleteBox');
