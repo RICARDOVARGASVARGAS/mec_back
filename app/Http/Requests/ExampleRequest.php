@@ -14,9 +14,9 @@ class ExampleRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('examples.store')) {
+        if (request()->routeIs('registerExample')) {
             $name = new ExampleRule(request()->company_id, null);
-        } elseif (request()->routeIs('examples.update')) {
+        } elseif (request()->routeIs('updateExample')) {
             $name = new ExampleRule(request()->company_id, $this->route('example')->id);
         }
 
@@ -29,8 +29,8 @@ class ExampleRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
-            'company_id' => 'empresa',
+            'name' => 'Modelo',
+            'company_id' => 'Mecánica',
         ];
     }
 }

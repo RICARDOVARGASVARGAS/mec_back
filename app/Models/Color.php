@@ -14,6 +14,10 @@ class Color extends Model
         'name', 'hex', 'company_id',
     ];
 
+    protected $allowFilter = ['name', 'hex'];
+    protected $allowSort = ['name', 'hex'];
+    protected $allowIncluded = ['company'];
+
     function company()
     {
         return $this->belongsTo(Company::class);

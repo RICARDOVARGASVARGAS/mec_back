@@ -32,6 +32,7 @@ class ColorController extends Controller
     {
         $item = Color::create([
             'name' => $request->name,
+            'hex' => $request->hex,
             'company_id' => $request->company_id
         ]);
 
@@ -51,6 +52,7 @@ class ColorController extends Controller
     {
         $color->update([
             'name' => $request->name,
+            'hex' => $request->hex,
             'company_id' => $request->company_id
         ]);
 

@@ -14,9 +14,9 @@ class BrandRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('brands.store')) {
+        if (request()->routeIs('registerBrand')) {
             $name = new BrandRule(request()->company_id, null);
-        } elseif (request()->routeIs('brands.update')) {
+        } elseif (request()->routeIs('updateBrand')) {
             $name = new BrandRule(request()->company_id, $this->route('brand')->id);
         }
 
@@ -29,8 +29,8 @@ class BrandRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
-            'company_id' => 'empresa',
+            'name' => 'Marca',
+            'company_id' => 'Mecánica',
         ];
     }
 }

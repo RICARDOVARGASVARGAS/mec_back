@@ -14,9 +14,9 @@ class ColorRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('colors.store')) {
+        if (request()->routeIs('registerColor')) {
             $name = new ColorRule(request()->company_id, null);
-        } elseif (request()->routeIs('colors.update')) {
+        } elseif (request()->routeIs('updateColor')) {
             $name = new ColorRule(request()->company_id, $this->route('color')->id);
         }
 
@@ -30,9 +30,9 @@ class ColorRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
-            'hex' => 'color',
-            'company_id' => 'empresa',
+            'name' => 'Color',
+            'hex' => 'Hex',
+            'company_id' => 'Mecánica',
         ];
     }
 }
