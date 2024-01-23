@@ -24,7 +24,6 @@ class ProductController extends Controller
 
         $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
 
-
         return ProductResource::collection($items);
     }
 

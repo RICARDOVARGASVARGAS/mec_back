@@ -14,6 +14,11 @@ class Year extends Model
         'name', 'company_id',
     ];
 
+
+    protected $allowFilter = ['name'];
+    protected $allowSort = ['name'];
+    protected $allowIncluded = ['company'];
+
     function company()
     {
         return $this->belongsTo(Company::class);

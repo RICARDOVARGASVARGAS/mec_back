@@ -14,9 +14,9 @@ class YearRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('years.store')) {
+        if (request()->routeIs('registerYear')) {
             $name = new YearRule(request()->company_id, null);
-        } elseif (request()->routeIs('years.update')) {
+        } elseif (request()->routeIs('updateYear')) {
             $name = new YearRule(request()->company_id, $this->route('year')->id);
         }
 
@@ -29,8 +29,8 @@ class YearRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'nombre',
-            'company_id' => 'empresa',
+            'name' => 'Año',
+            'company_id' => 'Mecánica',
         ];
     }
 }
