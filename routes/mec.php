@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BoxController;
 use App\Http\Controllers\Api\BrandController;
+use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\ExampleController;
 use App\Http\Controllers\Api\ProductController;
@@ -52,3 +53,9 @@ Route::post('getBox/{box}', [BoxController::class, 'getBox'])->name('getBox');
 Route::post('registerBox', [BoxController::class, 'registerBox'])->name('registerBox');
 Route::post('updateBox/{box}', [BoxController::class, 'updateBox'])->name('updateBox');
 Route::delete('deleteBox/{box}', [BoxController::class, 'deleteBox'])->name('deleteBox');
+
+Route::post('getClients', [ClientController::class, 'getClients'])->name('getClients');
+Route::post('getClient/{client}', [ClientController::class, 'getClient'])->name('getClient');
+Route::post('registerClient', [ClientController::class, 'registerClient'])->name('registerClient');
+Route::post('updateClient/{client}', [ClientController::class, 'updateClient'])->name('updateClient');
+Route::delete('deleteClient/{client}', [ClientController::class, 'deleteClient'])->name('deleteClient');

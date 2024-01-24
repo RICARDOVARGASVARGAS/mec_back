@@ -14,9 +14,9 @@ class ClientRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('clients.store')) {
+        if (request()->routeIs('registerClient')) {
             $document = new ClientRule(request()->company_id, null);
-        } elseif (request()->routeIs('clients.update')) {
+        } elseif (request()->routeIs('updateClient')) {
             $document = new ClientRule(request()->company_id, $this->route('client')->id);
         }
 
@@ -36,15 +36,15 @@ class ClientRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'document' => 'documento',
-            'name' => 'nombre',
-            'surname' => 'apellido paterno',
-            'last_name' => 'apellido materno',
-            'phone' => 'teléfono',
-            'email' => 'correo electrónico',
-            'address' => 'dirección',
-            'image' => 'imagen',
-            'company_id' => 'empresa',
+            'document' => 'Documento',
+            'name' => 'Nombre',
+            'surname' => 'Apellido Paterno',
+            'last_name' => 'Apellido Materno',
+            'phone' => 'Teléfono',
+            'email' => 'Correo Electrónico',
+            'address' => 'Dirección',
+            'image' => 'Imagen',
+            'company_id' => 'Mecánica',
         ];
     }
 }

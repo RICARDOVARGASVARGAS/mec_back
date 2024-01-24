@@ -7,13 +7,21 @@ use App\Http\Requests\ClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
-    function index(Request $request)
+    function getClients(Request $request)
     {
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
+
         $items = Client::where('company_id', $request->company_id)
+            ->included()
             ->where(function ($query) use ($request) {
                 $query->where('document', 'like', '%' . $request->search . '%')
                     ->orWhere('name', 'like', '%' . $request->search . '%')
@@ -24,12 +32,12 @@ class ClientController extends Controller
                     ->orWhere('address', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return ClientResource::collection($items);
     }
 
-    function store(ClientRequest $request)
+    function registerClient(ClientRequest $request)
     {
         $item = Client::create([
             'document' => $request->document,
@@ -47,12 +55,13 @@ class ClientController extends Controller
         ]);
     }
 
-    function show(Client $client)
+    function getClient($client)
     {
+        $client = Client::included()->find($client);
         return ClientResource::make($client);
     }
 
-    function update(ClientRequest $request, Client $client)
+    function updateClient(ClientRequest $request, Client $client)
     {
         $client->update([
             'document' => $request->document,
@@ -70,14 +79,22 @@ class ClientController extends Controller
         ]);
     }
 
-    function destroy(Client $client)
+    function deleteClient(Client $client)
     {
-        $client->delete();
-        if ($client->image) {
-            Storage::delete($client->image);
+        try {
+            $image = $client->image;
+            DB::beginTransaction();
+            $client->delete();
+            DB::commit();
+            if ($image) {
+                Storage::delete($image);
+            }
+            return ClientResource::make($client);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
-        return ClientResource::make($client)->additional([
-            'message' => 'Cliente Eliminado.'
-        ]);
     }
 }
