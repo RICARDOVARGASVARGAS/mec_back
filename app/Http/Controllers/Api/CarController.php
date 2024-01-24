@@ -17,49 +17,41 @@ use App\Models\Color;
 use App\Models\Example;
 use App\Models\Year;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
-    function index(Request $request)
+    function getCars(Request $request)
     {
-        $items = Car::with(['client', 'example', 'color', 'brand', 'year'])
-            ->where('plate', 'like', '%' . $request->search . '%')
-            ->orWhere('engine', 'like', '%' . $request->search . '%')
-            ->orWhere('chassis', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('client', 'document', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('client', 'name', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('client', 'surname', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('client', 'last_name', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('brand', 'name', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('example', 'name', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('year', 'name', 'like', '%' . $request->search . '%')
-            ->orWhereRelation('color', 'name', 'like', '%' . $request->search . '%')
-            ->orderBy('id', 'desc');
+        $request->validate([
+            'company_id' => ['required', 'exists:companies,id'],
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'string', 'in:all'],
+        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
 
-        $items = ($request->perPage == 'all') ? $items->get() : $items->paginate($request->perPage);
+        $items = Car::whereRelation('client', 'company_id', $request->company_id)
+            ->included()
+            ->where(function ($query) use ($request) {
+                $query->where('plate', 'like', '%' . $request->search . '%')
+                    ->orWhere('engine', 'like', '%' . $request->search . '%')
+                    ->orWhere('chassis', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('client', 'document', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('client', 'name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('client', 'surname', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('client', 'last_name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('brand', 'name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('example', 'name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('year', 'name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('color', 'name', 'like', '%' . $request->search . '%');
+            })->orderBy('id', 'desc');
+
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return CarResource::collection($items);
     }
 
-    function create(Request $request)
-    {
-        $clients = Client::where('company_id', $request->company_id)->get();
-        $examples = Example::where('company_id', $request->company_id)->get();
-        $colors = Color::where('company_id', $request->company_id)->get();
-        $brands = Brand::where('company_id', $request->company_id)->get();
-        $years = Year::where('company_id', $request->company_id)->get();
-
-        return response()->json([
-            'clients' => ClientResource::collection($clients),
-            'examples' => ExampleResource::collection($examples),
-            'colors' => ColorResource::collection($colors),
-            'brands' => BrandResource::collection($brands),
-            'years' => YearResource::collection($years)
-        ]);
-    }
-
-    function store(CarRequest $request)
+    function registerCar(CarRequest $request)
     {
         $item = Car::create([
             'plate' => $request->plate,
@@ -77,12 +69,13 @@ class CarController extends Controller
         ]);
     }
 
-    function show(Car $car)
+    function getCar($car)
     {
+        $car = Car::included()->find($car);
         return CarResource::make($car);
     }
 
-    function update(CarRequest $request, Car $car)
+    function updateCar(CarRequest $request, Car $car)
     {
         $car->update([
             'plate' => $request->plate,
@@ -100,14 +93,22 @@ class CarController extends Controller
         ]);
     }
 
-    function destroy(Car $car)
+    function deleteCar(Car $car)
     {
-        $car->delete();
-        if ($car->image) {
-            Storage::delete($car->image);
+        try {
+            $image = $car->image;
+            DB::beginTransaction();
+            $car->delete();
+            DB::commit();
+            if ($image) {
+                Storage::delete($image);
+            }
+            return CarResource::make($car);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
         }
-        return CarResource::make($car)->additional([
-            'message' => 'Vehículo Eliminado.'
-        ]);
     }
 }

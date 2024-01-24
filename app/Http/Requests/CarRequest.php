@@ -14,9 +14,9 @@ class CarRequest extends FormRequest
 
     public function rules(): array
     {
-        if (request()->routeIs('cars.store')) {
+        if (request()->routeIs('registerCar')) {
             $plate = new CarRule(request()->company_id, null);
-        } elseif (request()->routeIs('cars.update')) {
+        } elseif (request()->routeIs('updateCar')) {
             $plate = new CarRule(request()->company_id, $this->route('car')->id);
         }
 
@@ -24,27 +24,27 @@ class CarRequest extends FormRequest
             'plate' => ['required', $plate],
             'engine' => ['nullable'],
             'chassis' => ['nullable'],
-            'image' => ['nullable', 'image'],
             'client_id' => ['required', 'exists:clients,id'],
             'example_id' => ['required', 'exists:examples,id'],
             'color_id' => ['required', 'exists:colors,id'],
             'brand_id' => ['required', 'exists:brands,id'],
             'year_id' => ['required', 'exists:years,id'],
+            'company_id' => ['required', 'exists:companies,id'],
         ];
     }
 
     public function attributes(): array
     {
         return [
-            'plate' => 'placa',
-            'engine' => 'motor',
-            'chassis' => 'chasis',
-            'image' => 'imagen',
-            'client_id' => 'cliente',
-            'example_id' => 'modelo',
-            'color_id' => 'color',
-            'brand_id' => 'marca',
-            'year_id' => 'año',
+            'plate' => 'Placa',
+            'engine' => 'Motor',
+            'chassis' => 'MChasis',
+            'client_id' => 'Cliente',
+            'example_id' => 'Modelo',
+            'color_id' => 'Color',
+            'brand_id' => 'Marca',
+            'year_id' => 'Año',
+            'company_id' => 'Mecánica',
         ];
     }
 }
