@@ -2,23 +2,29 @@
 
 namespace App\Models;
 
+use App\Traits\QueryTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Sale extends Model
 {
-    use HasFactory;
+    use HasFactory, QueryTrait;
 
     protected $fillable = [
         'km',
         'entry_date',
         'exit_date',
+        'payment_date',
         'discount',
         'status',
         'client_id',
         'car_id',
         'company_id',
     ];
+
+    protected $allowFilter = ['km', 'entry_date', 'exit_date'];
+    protected $allowSort = ['km', 'entry_date', 'exit_date'];
+    protected $allowIncluded = ['client', 'car', 'company'];
 
     function client()
     {

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+
 use App\Http\Controllers\Api\BoxController;
 use App\Http\Controllers\Api\BrandController;
 use App\Http\Controllers\Api\CarController;

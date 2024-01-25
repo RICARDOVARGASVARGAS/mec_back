@@ -17,6 +17,7 @@ class SaleRequest extends FormRequest
             'km' => ['nullable'],
             'entry_date' => ['nullable', 'date'],
             'exit_date' => ['nullable', 'date'],
+            'payment_date' => ['nullable', 'date'],
             'discount' => ['nullable', 'numeric', 'min:0'],
             'status' => ['nullable', 'in:pending,done,cancelled,debt'],
             'client_id' => ['nullable', 'exists:clients,id'],
@@ -28,14 +29,14 @@ class SaleRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'km' => 'kilometraje',
-            'entry_date' => 'fecha de entrada',
-            'exit_date' => 'fecha de salida',
-            'discount' => 'descuento',
-            'status' => 'estado',
-            'client_id' => 'cliente',
-            'car_id' => 'vehículo',
-            'company_id' => 'empresa',
+            'km' => 'Kilometraje',
+            'entry_date' => 'Fecha de Entrada',
+            'exit_date' => 'Fecha de Salida',
+            'discount' => 'Descuento',
+            'status' => 'Estado',
+            'client_id' => 'Cliente',
+            'car_id' => 'Vehículo',
+            'company_id' => 'Mecánica',
         ];
     }
 }
