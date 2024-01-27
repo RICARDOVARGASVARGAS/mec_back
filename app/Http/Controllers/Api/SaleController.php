@@ -236,4 +236,50 @@ class SaleController extends Controller
             'res' => $request->all()
         ]);
     }
+
+    // Agregar Pagos
+    function addPayment(Request $request)
+    {
+        $request->validate([
+            'detail' => 'nullable',
+            'amount' => 'required|numeric|min:0',
+            'date_payment' => 'required|date',
+            'sale_id' => 'required|exists:sales,id',
+            'box_id' => 'required|exists:boxes,id',
+        ], [], [
+            'detail' => 'Detalle',
+            'amount' => 'Monto de Pago',
+            'date_payment' => 'Fecha de Pago',
+            'sale_id' => 'Venta',
+            'box_id' => 'Caja'
+        ]);
+        $item = Payment::create([
+            'detail' => $request->detail,
+            'amount' => $request->amount,
+            'date_payment' => $request->date_payment,
+            'sale_id' => $request->sale_id,
+            'box_id' => $request->box_id,
+        ]);
+
+        return PaymentResource::make($item)->additional([
+            'message' => 'Pago Registrado.',
+            'payment' => PaymentResource::make($item)
+        ]);
+    }
+
+    // Eliminar Pagos
+    function removePayment(Request $request)
+    {
+        $request->validate([
+            'payment_id' => 'required|exists:payments,id'
+        ], [], [
+            'payment_id' => 'Pago'
+        ]);
+        $payment = Payment::find($request->payment_id);
+        $payment->delete();
+        return PaymentResource::make($payment)->additional([
+            'message' => 'Pago Eliminado.',
+            'payment' => PaymentResource::make($payment)
+        ]);
+    }
 }

@@ -24,38 +24,25 @@ class PaymentController extends Controller
         return PaymentResource::collection($items);
     }
 
-    function store(PaymentRequest $request)
-    {
-        $item = Payment::create([
-            'detail' => $request->detail,
-            'amount' => $request->amount,
-            'date_payment' => $request->date_payment,
-            'sale_id' => $request->sale_id,
-            'box_id' => $request->box_id,
-        ]);
+    // 
 
-        return PaymentResource::make($item)->additional([
-            'message' => 'Pago Registrado.'
-        ]);
-    }
+    // function destroy(Payment $payment)
+    // {
+    //     $payment->delete();
+    //     return PaymentResource::make($payment)->additional([
+    //         'message' => 'Pago Eliminado.'
+    //     ]);
+    // }
 
-    function destroy(Payment $payment)
-    {
-        $payment->delete();
-        return PaymentResource::make($payment)->additional([
-            'message' => 'Pago Eliminado.'
-        ]);
-    }
+    // function getPayments(Request $request)
+    // {
+    //     $items = Payment::with(['sale.company', 'box.company'])
+    //         ->where('box_id', $request->box_id)
+    //         ->orderBy('date_payment', 'desc')
+    //         ->get();
 
-    function getPayments(Request $request)
-    {
-        $items = Payment::with(['sale.company', 'box.company'])
-            ->where('box_id', $request->box_id)
-            ->orderBy('date_payment', 'desc')
-            ->get();
-
-        return response()->json([
-            'data' => $items
-        ]);
-    }
+    //     return response()->json([
+    //         'data' => $items
+    //     ]);
+    // }
 }
