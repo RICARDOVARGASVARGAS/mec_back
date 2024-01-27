@@ -103,7 +103,7 @@ class SaleController extends Controller
     // Detalle de venta
     function getSaleDetail($sale)
     {
-        $sale =  Sale::find($sale);
+        $sale =  Sale::included()->find($sale);
 
         // servicios
         $services = $sale->services;

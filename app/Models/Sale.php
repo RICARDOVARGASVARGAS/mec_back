@@ -24,7 +24,7 @@ class Sale extends Model
 
     protected $allowFilter = ['km', 'entry_date', 'exit_date'];
     protected $allowSort = ['km', 'entry_date', 'exit_date'];
-    protected $allowIncluded = ['client', 'car', 'company'];
+    protected $allowIncluded = ['client', 'car', 'company','car.client'];
 
     function client()
     {
