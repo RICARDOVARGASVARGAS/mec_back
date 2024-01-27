@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Data;
+
 class Data
 {
 
@@ -109,7 +111,9 @@ class Data
                 ['listar', 'index'],
                 ['registrar', 'create'],
                 ['editar', 'edit'],
-                ['eliminar', 'destroy']
+                ['eliminar', 'destroy'],
+                ['detalle', 'detail'],
+                ['imprimir Boleta', 'print']
             ],
         ],
     ];
