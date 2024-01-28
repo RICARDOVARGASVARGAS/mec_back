@@ -52,9 +52,12 @@ Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
 
     Route::post('getBoxes', [BoxController::class, 'getBoxes'])->name('getBoxes');
     Route::post('getBox/{box}', [BoxController::class, 'getBox'])->name('getBox');
+    Route::get('getDetailBox/{box}', [BoxController::class, 'getDetailBox'])->name('getDetailBox');
     Route::post('registerBox', [BoxController::class, 'registerBox'])->name('registerBox');
     Route::post('updateBox/{box}', [BoxController::class, 'updateBox'])->name('updateBox');
     Route::delete('deleteBox/{box}', [BoxController::class, 'deleteBox'])->name('deleteBox');
+    Route::post('addMovement', [BoxController::class, 'addMovement'])->name('addMovement');
+    Route::delete('removeMovement/{movement}', [BoxController::class, 'removeMovement'])->name('removeMovement');
 
     Route::post('getClients', [ClientController::class, 'getClients'])->name('getClients');
     Route::post('getClient/{client}', [ClientController::class, 'getClient'])->name('getClient');

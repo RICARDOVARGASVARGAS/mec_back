@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BoxRequest;
 use App\Http\Resources\BoxResource;
+use App\Http\Resources\MovementResource;
 use App\Models\Box;
+use App\Models\Movement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -80,5 +82,74 @@ class BoxController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+
+    function getDetailBox($box)
+    {
+        $box =  Box::included()->find($box);
+        // movimientos
+        $movements = $box->movements()->with(['client'])->orderBy('id', 'desc')->get();
+        $totalMovements = floatval($movements->sum('amount'));
+
+        // pagos
+        $payments = $box->payments()->with(['sale'])->orderBy('id', 'desc')->get();
+        $totalPayments = floatval($payments->sum('amount'));
+
+        // Total de la caja
+        $total = $totalMovements + $totalPayments;
+        return response()->json([
+            'box' => BoxResource::make($box),
+            'movements' => $movements,
+            'totalMovements' => $totalMovements,
+            'payments' => $payments,
+            'totalPayments' => $totalPayments,
+            'total' => $total
+        ]);
+    }
+
+
+
+    // Agregar movimientos
+
+    function addMovement(Request $request)
+    {
+        $request->validate([
+            'amount' => ['required', 'numeric'],
+            'detail' => ['required'],
+            'date_movement' => ['required', 'date'],
+            'client_id' => ['nullable', 'exists:clients,id'],
+            'box_id' => ['required', 'exists:boxes,id'],
+        ], [], [
+            'amount' => 'Monto del Movimiento',
+            'detail' => 'Detalle del Movimiento',
+            'date_movement' => 'Fecha del Movimiento',
+            'client_id' => 'Cliente',
+            'box_id' => 'Caja'
+        ]);
+
+
+        $item = Movement::create([
+            'amount' => $request->amount,
+            'detail' => $request->detail,
+            'date_movement' => $request->date_movement,
+            'client_id' => $request->client_id,
+            'box_id' => $request->box_id
+        ]);
+
+        return MovementResource::make($item)->additional([
+            'message' => 'Movimiento Registrado.',
+            'movements' => $item
+        ]);
+    }
+
+    // Eliminar movimientos
+    function removeMovement(Movement $movement)
+    {
+        $movement->delete();
+        return MovementResource::make($movement)->additional([
+            'message' => 'Movimiento Eliminado.',
+            'movement' => $movement
+        ]);
     }
 }

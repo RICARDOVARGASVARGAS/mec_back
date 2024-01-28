@@ -12,6 +12,7 @@ class BoxResource extends JsonResource
         return array_merge(parent::toArray($request), [
             'storage' => $this->image ? 'storage/' . $this->image : null,
             'company' => CompanyResource::make($this->whenLoaded('company')),
+            'movements' => MovementResource::collection($this->whenLoaded('movements')),
         ]);
     }
 }

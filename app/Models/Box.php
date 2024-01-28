@@ -16,7 +16,7 @@ class Box extends Model
 
     protected $allowFilter = ['name'];
     protected $allowSort = ['name'];
-    protected $allowIncluded = ['company'];
+    protected $allowIncluded = ['company','movements','movements.client'];
 
     function company()
     {
