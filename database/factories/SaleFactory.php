@@ -12,9 +12,11 @@ class SaleFactory extends Factory
     {
         $client = Client::all()->random();
         return [
+            'number' => $this->faker->randomNumber(),
             'km' => $this->faker->randomNumber(),
             'entry_date' => $this->faker->date(),
             'exit_date' => $this->faker->date(),
+            'payment_date' => $this->faker->date(),
             'discount' => $this->faker->randomFloat(2, 0, 100),
             'status' => $this->faker->randomElement(['pending', 'done', 'cancelled', 'debt']),
             'client_id' => $client->id,

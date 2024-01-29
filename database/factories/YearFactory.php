@@ -10,6 +10,7 @@ class YearFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' => $this->faker->randomNumber(),
             'name' => $this->faker->year(),
             'company_id' => Company::all()->random()->id
         ];

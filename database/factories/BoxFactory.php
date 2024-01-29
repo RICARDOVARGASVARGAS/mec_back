@@ -10,6 +10,7 @@ class BoxFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' => $this->faker->randomNumber(),
             'name' => $this->faker->word(),
             'company_id' => Company::all()->random()->id,
         ];

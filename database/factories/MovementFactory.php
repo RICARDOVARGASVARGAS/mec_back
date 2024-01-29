@@ -11,6 +11,7 @@ class MovementFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' => $this->faker->randomNumber(),
             'amount' => $this->faker->numberBetween(-10000, 10000),
             'detail' => $this->faker->sentence(),
             'date_movement' => $this->faker->date(),

@@ -12,6 +12,7 @@ class PaymentFactory extends Factory
     {
         $sale = Sale::all()->random();
         return [
+            'number' => $this->faker->randomNumber(),
             'detail' => $this->faker->sentence,
             'amount' => $this->faker->randomFloat(2, 1, 100),
             'date_payment' => $this->faker->date(),

@@ -10,6 +10,7 @@ class ClientFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' => $this->faker->randomNumber(),
             'document' => $this->faker->unique()->numberBetween(10000000, 99999999),
             'name' => $this->faker->name(),
             'surname' => $this->faker->firstNameFemale(),

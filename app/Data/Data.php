@@ -104,7 +104,8 @@ class Data
                 ['listar', 'index'],
                 ['registrar', 'create'],
                 ['editar', 'edit'],
-                ['eliminar', 'destroy']
+                ['eliminar', 'destroy'],
+                ['historial', 'history'],
             ],
         ],
         [

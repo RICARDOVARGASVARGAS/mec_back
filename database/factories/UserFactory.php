@@ -25,6 +25,7 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' => $this->faker->randomNumber(),
             'names' => fake()->name(),
             'surnames' => fake()->name(),
             'phone' => fake()->phoneNumber(),

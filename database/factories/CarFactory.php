@@ -14,6 +14,7 @@ class CarFactory extends Factory
     public function definition(): array
     {
         return [
+            'number' => $this->faker->randomNumber(),
             'plate' => $this->faker->numerify('###-###'),
             'engine' => $this->faker->word(),
             'chassis' => $this->faker->word(),

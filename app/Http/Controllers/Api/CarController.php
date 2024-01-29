@@ -9,12 +9,14 @@ use App\Http\Resources\CarResource;
 use App\Http\Resources\ClientResource;
 use App\Http\Resources\ColorResource;
 use App\Http\Resources\ExampleResource;
+use App\Http\Resources\SaleResource;
 use App\Http\Resources\YearResource;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Client;
 use App\Models\Color;
 use App\Models\Example;
+use App\Models\Sale;
 use App\Models\Year;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -111,5 +113,13 @@ class CarController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    // Obtener historial
+    function getCarHistory($car)
+    {
+        $sales = Sale::where('car_id', $car)->orderBy('number', 'desc')->get();
+
+        return SaleResource::collection($sales);
     }
 }
