@@ -9,6 +9,7 @@ use App\Http\Resources\CompanyResource;
 use App\Http\Resources\UserResource;
 use App\Models\Company;
 use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -44,6 +45,7 @@ class CompanyController extends Controller
 
         // Registrando el usuario
         $user = $company->users()->create([
+            'number' => User::where('company_id', $request->company_id)->max('number') + 1,
             'names' => $request->names,
             'surnames' => $request->surnames,
             'phone' => $request->phone,
