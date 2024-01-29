@@ -186,17 +186,22 @@ class SaleController extends Controller
         ]);
 
         return response()->json([
-            'res' => $request->all(),
             'sale' => $sale
         ]);
     }
 
     function removeProduct(Request $request)
     {
+        $request->validate([
+            'id' => 'required|exists:product_sale,id'
+        ], [], [
+            'id' => 'ID'
+        ]);
         DB::table('product_sale')->where('id', $request->id)->delete();
 
         return response()->json([
-            'res' => $request->all()
+            'res' => $request->all(),
+            'message' => 'Producto eliminado'
         ]);
     }
 
@@ -225,16 +230,23 @@ class SaleController extends Controller
         ]);
 
         return response()->json([
-            'res' => $request->all()
+            'res' => $request->all(),
+            'message' => 'Servicio agregado'
         ]);
     }
 
     function removeService(Request $request)
     {
+        $request->validate([
+            'id' => 'required|exists:sale_service,id'
+        ], [], [
+            'id' => 'ID'
+        ]);
         DB::table('sale_service')->where('id', $request->id)->delete();
 
         return response()->json([
-            'res' => $request->all()
+            'res' => $request->all(),
+            'message' => 'Servicio eliminado'
         ]);
     }
 
@@ -255,6 +267,7 @@ class SaleController extends Controller
             'box_id' => 'Caja'
         ]);
         $item = Payment::create([
+            'number' => Payment::where('box_id', $request->box_id)->max('number') + 1,
             'detail' => $request->detail,
             'amount' => $request->amount,
             'date_payment' => $request->date_payment,
@@ -264,7 +277,6 @@ class SaleController extends Controller
 
         return PaymentResource::make($item)->additional([
             'message' => 'Pago Registrado.',
-            'payment' => PaymentResource::make($item)
         ]);
     }
 
@@ -280,7 +292,6 @@ class SaleController extends Controller
         $payment->delete();
         return PaymentResource::make($payment)->additional([
             'message' => 'Pago Eliminado.',
-            'payment' => PaymentResource::make($payment)
         ]);
     }
 }

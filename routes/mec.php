@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\YearController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
+// Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
 
     Route::post('getBrands', [BrandController::class, 'getBrands'])->name('getBrands');
     Route::post('getBrand/{brand}', [BrandController::class, 'getBrand'])->name('getBrand');
@@ -70,4 +70,4 @@ Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
     Route::post('registerCar', [CarController::class, 'registerCar'])->name('registerCar');
     Route::post('updateCar/{car}', [CarController::class, 'updateCar'])->name('updateCar');
     Route::delete('deleteCar/{car}', [CarController::class, 'deleteCar'])->name('deleteCar');
-});
+// });

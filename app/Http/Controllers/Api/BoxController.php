@@ -85,7 +85,7 @@ class BoxController extends Controller
         }
     }
 
-
+    // Detalle de caja
     function getDetailBox($box)
     {
         $box =  Box::included()->find($box);
@@ -112,7 +112,6 @@ class BoxController extends Controller
 
 
     // Agregar movimientos
-
     function addMovement(Request $request)
     {
         $request->validate([
@@ -126,12 +125,12 @@ class BoxController extends Controller
             'detail' => 'Detalle del Movimiento',
             'date_movement' => 'Fecha del Movimiento',
             'client_id' => 'Cliente',
-            'box_id' => 'Caja'
+            'box_id' => 'Caja',
         ]);
 
 
         $item = Movement::create([
-            'number' => Movement::where('company_id', $request->company_id)->max('number') + 1,
+            'number' => Movement::where('box_id', $request->box_id)->max('number') + 1,
             'amount' => $request->amount,
             'detail' => $request->detail,
             'date_movement' => $request->date_movement,
@@ -141,7 +140,6 @@ class BoxController extends Controller
 
         return MovementResource::make($item)->additional([
             'message' => 'Movimiento Registrado.',
-            'movements' => $item
         ]);
     }
 
@@ -151,7 +149,6 @@ class BoxController extends Controller
         $movement->delete();
         return MovementResource::make($movement)->additional([
             'message' => 'Movimiento Eliminado.',
-            'movement' => $movement
         ]);
     }
 }
