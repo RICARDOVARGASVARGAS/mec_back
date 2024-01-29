@@ -10,7 +10,7 @@ class Movement extends Model
 {
     use HasFactory, QueryTrait;
 
-    protected $fillable = ['amount', 'detail', 'date_movement', 'client_id', 'box_id'];
+    protected $fillable = ['number', 'amount', 'detail', 'date_movement', 'client_id', 'box_id'];
 
     // protected $allowFilter = ['name'];
     // protected $allowSort = ['name'];

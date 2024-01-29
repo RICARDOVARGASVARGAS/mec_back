@@ -46,6 +46,7 @@ class UserController extends Controller
     function registerUser(UserRequest $request)
     {
         $item = User::create([
+            'number' => User::where('company_id', $request->company_id)->max('number') + 1,
             'names' => $request->names,
             'surnames' => $request->surnames,
             'phone' => $request->phone,

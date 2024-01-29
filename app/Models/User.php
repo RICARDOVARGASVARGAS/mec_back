@@ -16,7 +16,7 @@ class User extends Authenticatable implements JWTSubject
     use HasApiTokens, HasFactory, Notifiable, QueryTrait;
 
     protected $fillable = [
-        'names',
+        'number', 'names',
         'surnames',
         'phone',
         'image',
@@ -39,7 +39,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $allowIncluded = ['company', 'permissions'];
-    
+
 
     function company()
     {

@@ -11,7 +11,7 @@ class Color extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'name', 'hex', 'company_id',
+        'number',  'name', 'hex', 'company_id',
     ];
 
     protected $allowFilter = ['name', 'hex'];

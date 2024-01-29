@@ -23,26 +23,4 @@ class PaymentController extends Controller
 
         return PaymentResource::collection($items);
     }
-
-    // 
-
-    // function destroy(Payment $payment)
-    // {
-    //     $payment->delete();
-    //     return PaymentResource::make($payment)->additional([
-    //         'message' => 'Pago Eliminado.'
-    //     ]);
-    // }
-
-    // function getPayments(Request $request)
-    // {
-    //     $items = Payment::with(['sale.company', 'box.company'])
-    //         ->where('box_id', $request->box_id)
-    //         ->orderBy('date_payment', 'desc')
-    //         ->get();
-
-    //     return response()->json([
-    //         'data' => $items
-    //     ]);
-    // }
 }

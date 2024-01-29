@@ -32,6 +32,7 @@ class ColorController extends Controller
     function registerColor(ColorRequest $request)
     {
         $item = Color::create([
+            'number' => Color::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'hex' => $request->hex,
             'company_id' => $request->company_id

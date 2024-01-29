@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('movements', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('number')->nullable();
             $table->float('amount')->default(0);
             $table->string('detail')->nullable();
             $table->date('date_movement')->nullable();

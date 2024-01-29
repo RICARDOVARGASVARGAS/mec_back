@@ -32,6 +32,7 @@ class ExampleController extends Controller
     function registerExample(ExampleRequest $request)
     {
         $item = Example::create([
+            'number' => Example::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'company_id' => $request->company_id
         ]);

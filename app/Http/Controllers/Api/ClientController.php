@@ -40,6 +40,7 @@ class ClientController extends Controller
     function registerClient(ClientRequest $request)
     {
         $item = Client::create([
+            'number' => Client::where('company_id', $request->company_id)->max('number') + 1,
             'document' => $request->document,
             'name' => $request->name,
             'surname' => $request->surname,

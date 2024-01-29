@@ -68,12 +68,27 @@ class CompanyController extends Controller
     {
         $request->validate([
             'name' => 'required|string|min:3|max:50|unique:companies,name,' . $company->id,
+            'phone' => 'nullable|string|min:3|max:30',
+            'address' => 'nullable|string|min:3|max:150',
+            'account_one' => 'nullable|string|min:3|max:100',
+            'account_two' => 'nullable|string|min:3|max:100',
+            'account_three' => 'nullable|string|min:3|max:100',
         ], [], [
             'name' => 'Nombre de la Mecánica',
+            'phone' => 'Teléfono',
+            'address' => 'Dirección',
+            'account_one' => 'Cuenta Bancaria Uno',
+            'account_two' => 'Cuenta Bancaria Dos',
+            'account_three' => 'Cuenta Bancaria Tres',
         ]);
 
         $company->update([
             'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'account_one' => $request->account_one,
+            'account_two' => $request->account_two,
+            'account_three' => $request->account_three,
         ]);
 
         // Respuesta

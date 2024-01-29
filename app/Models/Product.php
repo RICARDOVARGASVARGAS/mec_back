@@ -11,7 +11,7 @@ class Product extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'name', 'ticket', 'price_buy', 'price_sell', 'image', 'company_id',
+        'number',  'name', 'ticket', 'price_buy', 'price_sell', 'image', 'company_id',
     ];
 
     protected $allowFilter = ['name', 'ticket', 'price_buy', 'price_sell'];

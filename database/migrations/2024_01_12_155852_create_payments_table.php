@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('number')->nullable();
             $table->string('detail')->nullable();
             $table->float('amount');
             $table->date('date_payment');

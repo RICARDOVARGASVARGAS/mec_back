@@ -44,6 +44,7 @@ class SaleController extends Controller
     function registerSale(SaleRequest $request)
     {
         $item = Sale::create([
+            'number' => Sale::where('company_id', $request->company_id)->max('number') + 1,
             'km' => $request->km,
             'entry_date' => $request->entry_date,
             'client_id' => $request->client_id,

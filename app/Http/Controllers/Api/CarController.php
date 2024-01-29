@@ -54,6 +54,7 @@ class CarController extends Controller
     function registerCar(CarRequest $request)
     {
         $item = Car::create([
+            'number' => Car::where('company_id', $request->company_id)->max('number') + 1,
             'plate' => $request->plate,
             'engine' => $request->engine,
             'chassis' => $request->chassis,

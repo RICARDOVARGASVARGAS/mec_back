@@ -32,6 +32,7 @@ class BrandController extends Controller
     function registerBrand(BrandRequest $request)
     {
         $item = Brand::create([
+            'number' => Brand::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'company_id' => $request->company_id
         ]);

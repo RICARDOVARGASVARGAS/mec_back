@@ -36,6 +36,7 @@ class BoxController extends Controller
     function registerBox(BoxRequest $request)
     {
         $item = Box::create([
+            'number' => Box::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'ticket' => $request->ticket,
             'company_id' => $request->company_id
@@ -130,6 +131,7 @@ class BoxController extends Controller
 
 
         $item = Movement::create([
+            'number' => Movement::where('company_id', $request->company_id)->max('number') + 1,
             'amount' => $request->amount,
             'detail' => $request->detail,
             'date_movement' => $request->date_movement,

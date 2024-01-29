@@ -37,6 +37,7 @@ class ProductController extends Controller
     function registerProduct(ProductRequest $request)
     {
         $item = Product::create([
+            'number' => Product::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'ticket' => $request->ticket,
             'price_buy' => $request->price_buy,

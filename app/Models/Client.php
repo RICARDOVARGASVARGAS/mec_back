@@ -11,7 +11,7 @@ class Client extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'document', 'name', 'surname', 'last_name', 'phone',
+        'number', 'document', 'name', 'surname', 'last_name', 'phone',
         'email', 'address', 'image', 'company_id'
     ];
 

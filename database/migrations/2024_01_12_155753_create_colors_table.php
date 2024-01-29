@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('colors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('number')->nullable();
             $table->string('name');
             $table->string('hex');
             $table->foreignId('company_id')->constrained();

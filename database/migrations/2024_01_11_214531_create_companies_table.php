@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique()->nullable();
             $table->string('image')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('account_one')->nullable();
+            $table->string('account_two')->nullable();
+            $table->string('account_three')->nullable();
             $table->timestamps();
         });
     }

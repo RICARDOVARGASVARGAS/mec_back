@@ -11,7 +11,7 @@ class Brand extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'name', 'company_id',
+        'number', 'name', 'company_id',
     ];
 
     protected $allowFilter = ['name'];

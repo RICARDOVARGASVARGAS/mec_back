@@ -32,6 +32,7 @@ class YearController extends Controller
     function registerYear(YearRequest $request)
     {
         $item = Year::create([
+            'number' => Year::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'company_id' => $request->company_id
         ]);

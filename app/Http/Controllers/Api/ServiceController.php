@@ -35,6 +35,7 @@ class ServiceController extends Controller
     function registerService(ServiceRequest $request)
     {
         $item = Service::create([
+            'number' => Service::where('company_id', $request->company_id)->max('number') + 1,
             'name' => $request->name,
             'ticket' => $request->ticket,
             'company_id' => $request->company_id

@@ -11,7 +11,7 @@ class Service extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'name', 'ticket', 'image', 'company_id'
+        'number', 'name', 'ticket', 'image', 'company_id'
     ];
 
     protected $allowFilter = ['name', 'ticket'];

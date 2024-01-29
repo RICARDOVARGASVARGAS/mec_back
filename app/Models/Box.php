@@ -11,12 +11,12 @@ class Box extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'name', 'image', 'company_id',
+        'number',  'name', 'image', 'company_id',
     ];
 
     protected $allowFilter = ['name'];
     protected $allowSort = ['name'];
-    protected $allowIncluded = ['company','movements','movements.client'];
+    protected $allowIncluded = ['company', 'movements', 'movements.client'];
 
     function company()
     {
