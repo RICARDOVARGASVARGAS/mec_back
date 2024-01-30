@@ -27,7 +27,8 @@ class SaleController extends Controller
         $items = Sale::where('company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
-                $query->where('entry_date', 'like', '%' . $request->search . '%')
+                $query->where('number', 'like', '%' . $request->search . '%')
+                    ->orWhere('entry_date', 'like', '%' . $request->search . '%')
                     ->orWhere('exit_date', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('client', 'document', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('client', 'name', 'like', '%' . $request->search . '%')
@@ -84,21 +85,8 @@ class SaleController extends Controller
 
     function deleteSale(Sale $sale)
     {
-        try {
-            $image = $sale->image;
-            DB::beginTransaction();
-            $sale->delete();
-            DB::commit();
-            if ($image) {
-                Storage::delete($image);
-            }
-            return SaleResource::make($sale);
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return response()->json([
-                'message' => $e->getMessage()
-            ], 500);
-        }
+        $sale->delete();
+        return SaleResource::make($sale);
     }
 
     // Detalle de venta
@@ -186,7 +174,8 @@ class SaleController extends Controller
         ]);
 
         return response()->json([
-            'sale' => $sale
+            'sale' => $sale,
+            'message' => 'Producto Agregado'
         ]);
     }
 

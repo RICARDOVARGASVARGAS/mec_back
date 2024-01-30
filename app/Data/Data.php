@@ -119,5 +119,16 @@ class Data
                 ['imprimir Boleta', 'print']
             ],
         ],
+        [
+            ['cotizaciones', 'calculate'],
+            [
+                ['listar', 'index'],
+                ['registrar', 'create'],
+                ['editar', 'edit'],
+                ['eliminar', 'destroy'],
+                ['detalle', 'detail'],
+                ['imprimir Boleta', 'print']
+            ],
+        ],
     ];
 }

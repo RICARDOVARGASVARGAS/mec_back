@@ -62,4 +62,9 @@ class Company extends Model
     {
         return $this->hasMany(Color::class);
     }
+
+    function calculates()
+    {
+        return $this->hasMany(Calculate::class);
+    }
 }

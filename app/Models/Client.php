@@ -38,4 +38,9 @@ class Client extends Model
     {
         return $this->hasMany(Movement::class);
     }
+
+    function calculates()
+    {
+        return $this->hasMany(Calculate::class);
+    }
 }

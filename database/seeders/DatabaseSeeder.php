@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Box;
 use App\Models\Brand;
+use App\Models\Calculate;
 use App\Models\Car;
 use App\Models\Client;
 use App\Models\Color;
@@ -61,5 +62,7 @@ class DatabaseSeeder extends Seeder
         Payment::factory(500)->create();
         Movement::factory(500)->create();
         $this->call(SaleSeeder::class);
+        Calculate::factory(50)->create();
+        $this->call(CalculateSeeder::class);
     }
 }

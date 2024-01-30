@@ -30,4 +30,11 @@ class Product extends Model
             ->withPivot(['id', 'quantity', 'price_buy', 'price_sell', 'date_sale'])
             ->withTimestamps();
     }
+
+    function calculates()
+    {
+        return $this->belongsToMany(Calculate::class)
+            ->withPivot(['id', 'quantity', 'price_sell'])
+            ->withTimestamps();
+    }
 }

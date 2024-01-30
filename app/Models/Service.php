@@ -30,4 +30,11 @@ class Service extends Model
             ->withPivot(['id', 'price_service', 'date_service'])
             ->withTimestamps();
     }
+
+    function calculates()
+    {
+        return $this->belongsToMany(Calculate::class)
+            ->withPivot(['id', 'price_service'])
+            ->withTimestamps();
+    }
 }

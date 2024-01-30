@@ -49,4 +49,9 @@ class Car extends Model
     {
         return $this->hasMany(Sale::class);
     }
+
+    function calculates()
+    {
+        return $this->hasMany(Calculate::class);
+    }
 }
