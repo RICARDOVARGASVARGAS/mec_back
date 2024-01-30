@@ -60,4 +60,9 @@ class Sale extends Model
             ->withPivot(['id', 'price_service', 'date_service'])
             ->withTimestamps();
     }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
 }

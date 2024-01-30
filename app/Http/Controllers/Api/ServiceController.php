@@ -17,7 +17,7 @@ class ServiceController extends Controller
         $request->validate([
             'company_id' => ['required', 'exists:companies,id'],
             'search' => ['nullable', 'string'],
-            'perPage' => ['nullable', 'string', 'in:all'],
+            'perPage' => ['nullable'],
         ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
 
         $items = Service::where('company_id', $request->company_id)

@@ -12,6 +12,7 @@ use App\Models\Client;
 use App\Models\Color;
 use App\Models\Company;
 use App\Models\Example;
+use App\Models\Message;
 use App\Models\Movement;
 use App\Models\Payment;
 use App\Models\Product;
@@ -40,6 +41,8 @@ class DatabaseSeeder extends Seeder
         Storage::createDirectory('users');
         Storage::deleteDirectory('cars');
         Storage::createDirectory('cars');
+        Storage::deleteDirectory('messages');
+        Storage::createDirectory('messages');
 
         Company::factory(3)->create();
         User::factory(10)->create();
@@ -64,5 +67,6 @@ class DatabaseSeeder extends Seeder
         $this->call(SaleSeeder::class);
         Calculate::factory(50)->create();
         $this->call(CalculateSeeder::class);
+        Message::factory(1000)->create();
     }
 }

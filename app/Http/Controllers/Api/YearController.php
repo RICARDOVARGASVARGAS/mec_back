@@ -15,7 +15,7 @@ class YearController extends Controller
         $request->validate([
             'company_id' => ['required', 'exists:companies,id'],
             'search' => ['nullable', 'string'],
-            'perPage' => ['nullable', 'string'],
+            'perPage' => ['nullable'],
         ], [], ['company_id' => 'Mecánica']);
 
         $items = Year::where('company_id', $request->company_id)

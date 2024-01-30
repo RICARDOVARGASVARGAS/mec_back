@@ -116,7 +116,8 @@ class Data
                 ['editar', 'edit'],
                 ['eliminar', 'destroy'],
                 ['detalle', 'detail'],
-                ['imprimir Boleta', 'print']
+                ['imprimir Boleta', 'print'],
+                ['mensajes', 'message'],
             ],
         ],
         [

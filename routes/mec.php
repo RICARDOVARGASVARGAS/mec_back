@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CarController;
 use App\Http\Controllers\Api\ClientController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\ExampleController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ServiceController;
 use App\Http\Controllers\Api\YearController;
@@ -71,4 +72,9 @@ Route::post('registerCar', [CarController::class, 'registerCar'])->name('registe
 Route::post('updateCar/{car}', [CarController::class, 'updateCar'])->name('updateCar');
 Route::delete('deleteCar/{car}', [CarController::class, 'deleteCar'])->name('deleteCar');
 Route::get('getCarHistory/{car}', [CarController::class, 'getCarHistory'])->name('getCarHistory');
+
+Route::get('getMessages/{sale}', [MessageController::class, 'getMessages'])->name('getMessages');
+Route::post('sendMessage', [MessageController::class, 'sendMessage'])->name('sendMessage');
+Route::delete('deleteMessage/{message}', [MessageController::class, 'deleteMessage'])->name('deleteMessage');
+
 // });

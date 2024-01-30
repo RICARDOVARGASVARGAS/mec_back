@@ -21,7 +21,7 @@ class UserController extends Controller
 
         $request->validate([
             'search' => 'nullable',
-            'perPage' => 'nullable|numeric',
+            'perPage' => 'nullable',
             'company' => 'required|exists:companies,id'
         ], [], [
             'search' => 'Búsqueda',
