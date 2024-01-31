@@ -59,6 +59,7 @@ Route::post('updateBox/{box}', [BoxController::class, 'updateBox'])->name('updat
 Route::delete('deleteBox/{box}', [BoxController::class, 'deleteBox'])->name('deleteBox');
 Route::post('addMovement', [BoxController::class, 'addMovement'])->name('addMovement');
 Route::delete('removeMovement/{movement}', [BoxController::class, 'removeMovement'])->name('removeMovement');
+Route::post('getReportProfit', [BoxController::class, 'getReportProfit'])->name('getReportProfit');
 
 Route::post('getClients', [ClientController::class, 'getClients'])->name('getClients');
 Route::post('getClient/{client}', [ClientController::class, 'getClient'])->name('getClient');

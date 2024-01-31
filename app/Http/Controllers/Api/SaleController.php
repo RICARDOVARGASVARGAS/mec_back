@@ -284,9 +284,10 @@ class SaleController extends Controller
         ]);
     }
 
-    // Obtener Ganancias
+    // Reporte de Cajas de ganancias
     function getProfit(Request $request)
     {
+
         $request->validate([
             'start_date' => ['required', 'date', 'before_or_equal:end_date'],
             'end_date' => ['required', 'date', 'after_or_equal:start_date'],
@@ -297,21 +298,65 @@ class SaleController extends Controller
             'company_id' => 'Mecánica'
         ]);
 
-        $sales = Sale::where('company_id', $request->company_id)->whereBetween('payment_date', [$request->start_date, $request->end_date])->get();
+        $payments = Payment::with('box', 'sale')->whereRelation('sale', 'company_id', $request->company_id)
+            ->whereRelation('sale', 'payment_date', '>=', $request->start_date)
+            ->whereRelation('sale', 'payment_date', '<=', $request->end_date)
+            ->get();
 
         // Sumar los pagos para cada venta
-        $totalPayments = 0;
-        foreach ($sales as $sale) {
-            $totalPayments += $sale->payments()->sum('amount');
+        $totalPayments = floatval($payments->sum('amount'));
+        $chart = [];
+        // Obtener el nombre de las cajas 
+        $boxNames = $payments->pluck('box.name')->unique();
+
+        foreach ($boxNames as $key => $value) {
+            $chart[$value] = $payments->where('box.name', $value)->sum('amount');
         }
+
+        $sales = Sale::where('company_id', $request->company_id)
+            ->where('payment_date', '>=', $request->start_date)
+            ->where('payment_date', '<=', $request->end_date)
+            ->get();
 
         return response()->json([
             'sales' => $sales,
-            'total_payments' => $totalPayments
-        ]);
-
-        return response()->json([
-            'sales' => $sales
+            'boxNames' => $boxNames,
+            'totalPayments' => $totalPayments,
+            'chart' => $chart,
+            'payments' => $payments,
         ]);
     }
+
+    // Obtener Ganancias
+    // function getProfit(Request $request)
+    // {
+    //     $request->validate([
+    //         'start_date' => ['required', 'date', 'before_or_equal:end_date'],
+    //         'end_date' => ['required', 'date', 'after_or_equal:start_date'],
+    //         'company_id' => ['required', 'exists:companies,id']
+    //     ], [], [
+    //         'start_date' => 'Fecha de Inicio',
+    //         'end_date' => 'Fecha de Fin',
+    //         'company_id' => 'Mecánica'
+    //     ]);
+
+    //     $sales = Sale::where('company_id', $request->company_id)->whereBetween('payment_date', [$request->start_date, $request->end_date])->get();
+
+    //     // Sumar los pagos para cada venta
+    //     $totalPayments = 0;
+    //     foreach ($sales as $sale) {
+    //         $totalPayments += $sale->payments()->sum('amount');
+    //     }
+
+    //     return response()->json([
+    //         'sales' => $sales,
+    //         'total_payments' => $totalPayments
+    //     ]);
+
+    //     return response()->json([
+    //         'sales' => $sales
+    //     ]);
+    // }
+
+
 }

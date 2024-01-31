@@ -8,6 +8,8 @@ use App\Http\Resources\BoxResource;
 use App\Http\Resources\MovementResource;
 use App\Models\Box;
 use App\Models\Movement;
+use App\Models\Payment;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -151,4 +153,6 @@ class BoxController extends Controller
             'message' => 'Movimiento Eliminado.',
         ]);
     }
+
+   
 }
