@@ -70,12 +70,12 @@ class SaleController extends Controller
             'km' => $request->km,
             'entry_date' => $request->entry_date,
             'exit_date' => $request->exit_date,
+            'payment_date' => $request->payment_date,
             'client_id' => $request->client_id,
             'car_id' => $request->car_id,
             'company_id' => $request->company_id,
             'status' => $request->status,
             'discount' => $request->discount,
-            'payment_date' => $request->payment_date
         ]);
 
         return SaleResource::make($sale)->additional([
@@ -281,6 +281,37 @@ class SaleController extends Controller
         $payment->delete();
         return PaymentResource::make($payment)->additional([
             'message' => 'Pago Eliminado.',
+        ]);
+    }
+
+    // Obtener Ganancias
+    function getProfit(Request $request)
+    {
+        $request->validate([
+            'start_date' => ['required', 'date', 'before_or_equal:end_date'],
+            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
+            'company_id' => ['required', 'exists:companies,id']
+        ], [], [
+            'start_date' => 'Fecha de Inicio',
+            'end_date' => 'Fecha de Fin',
+            'company_id' => 'Mecánica'
+        ]);
+
+        $sales = Sale::where('company_id', $request->company_id)->whereBetween('payment_date', [$request->start_date, $request->end_date])->get();
+
+        // Sumar los pagos para cada venta
+        $totalPayments = 0;
+        foreach ($sales as $sale) {
+            $totalPayments += $sale->payments()->sum('amount');
+        }
+
+        return response()->json([
+            'sales' => $sales,
+            'total_payments' => $totalPayments
+        ]);
+
+        return response()->json([
+            'sales' => $sales
         ]);
     }
 }

@@ -131,5 +131,11 @@ class Data
                 ['imprimir Boleta', 'print']
             ],
         ],
+        [
+            ['reportes', 'report'],
+            [
+                ['ganancias', 'profit'],
+            ],
+        ],
     ];
 }

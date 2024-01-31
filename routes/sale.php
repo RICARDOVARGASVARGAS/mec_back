@@ -17,4 +17,6 @@ Route::post('addService', [SaleController::class, 'addService'])->name('addServi
 Route::post('removeService', [SaleController::class, 'removeService'])->name('removeService');
 Route::post('addPayment', [SaleController::class, 'addPayment'])->name('addPayment');
 Route::post('removePayment', [SaleController::class, 'removePayment'])->name('removePayment');
+
+Route::post('getProfit', [SaleController::class, 'getProfit'])->name('getProfit');
 // });
