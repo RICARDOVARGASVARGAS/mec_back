@@ -44,29 +44,34 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('messages');
         Storage::createDirectory('messages');
 
-        Company::factory(3)->create();
-        User::factory(10)->create();
+
         $this->call([
-            CompanySeeder::class,
-            UserSeeder::class,
             PermissionSeeder::class,
         ]);
 
-        Product::factory(50)->create();
-        Service::factory(50)->create();
-        Color::factory(10)->create();
-        Year::factory(10)->create();
-        Example::factory(10)->create();
-        Brand::factory(10)->create();
-        Client::factory(50)->create();
-        Car::factory(100)->create();
-        Box::factory(10)->create();
-        Sale::factory(600)->create();
-        Payment::factory(500)->create();
-        Movement::factory(500)->create();
-        $this->call(SaleSeeder::class);
-        Calculate::factory(50)->create();
-        $this->call(CalculateSeeder::class);
-        Message::factory(1000)->create();
+        // Company::factory(3)->create();
+        // User::factory(10)->create();
+        // $this->call([
+        //     CompanySeeder::class,
+        //     UserSeeder::class,
+        //     PermissionSeeder::class,
+        // ]);
+
+        // Product::factory(50)->create();
+        // Service::factory(50)->create();
+        // Color::factory(10)->create();
+        // Year::factory(10)->create();
+        // Example::factory(10)->create();
+        // Brand::factory(10)->create();
+        // Client::factory(50)->create();
+        // Car::factory(100)->create();
+        // Box::factory(10)->create();
+        // Sale::factory(600)->create();
+        // Payment::factory(500)->create();
+        // Movement::factory(500)->create();
+        // $this->call(SaleSeeder::class);
+        // Calculate::factory(50)->create();
+        // $this->call(CalculateSeeder::class);
+        // Message::factory(1000)->create();
     }
 }
