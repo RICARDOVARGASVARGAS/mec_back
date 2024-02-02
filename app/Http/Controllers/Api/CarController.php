@@ -55,8 +55,15 @@ class CarController extends Controller
 
     function registerCar(CarRequest $request)
     {
+        $count =  Client::where('company_id', $request->company_id)
+            ->with('cars') // Cargar la relación cars para evitar consultas adicionales
+            ->get()
+            ->pluck('cars.*') // Obtener todos los carros de cada cliente
+            ->flatten() // Aplanar la colección para contar todos los carros
+            ->count();
+
         $item = Car::create([
-            'number' => Car::where('company_id', $request->company_id)->max('number') + 1,
+            'number' => ($count + 1),
             'plate' => $request->plate,
             'engine' => $request->engine,
             'chassis' => $request->chassis,
