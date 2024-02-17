@@ -7,38 +7,28 @@ use App\Models\Sale;
 use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class SaleSeeder extends Seeder
 {
     public function run(): void
     {
-        $sales = Sale::all();
+        $json = File::get("database/data/sales.json");
+        $items = json_decode($json);
 
-        foreach ($sales as $sale) {
-            $products = Product::where('company_id', $sale->company_id)->inRandomOrder()->take(rand(1, 10))->pluck('id')->toArray();
-            $services = Service::where('company_id', $sale->company_id)->inRandomOrder()->take(rand(1, 10))->pluck('id')->toArray();
-
-            foreach ($products as $product) {
-                $sale->products()->attach(
-                    $product,
-                    [
-                        'quantity' => rand(1, 10),
-                        'price_buy' => rand(1, 10),
-                        'price_sell' => rand(1, 10),
-                        'date_sale' => date('Y-m-d')
-                    ],
-                );
-            }
-
-            foreach ($services as $service) {
-                $sale->services()->attach(
-                    $service,
-                    [
-                        'price_service' => mt_rand(4, 1000) / 10,
-                        'date_service' => date('Y-m-d')
-                    ],
-                );
-            }
+        foreach ($items as $key => $value) {
+            Sale::create([
+                'number' => $value->id,
+                'km'  => $value->km,
+                'entry_date'  => $value->entry_date == "" ? null : $value->entry_date,
+                'exit_date'  => $value->exit_date == "" ? null : $value->exit_date,
+                'payment_date'  => null,
+                'discount'  => $value->discount,
+                'status'  => $value->status,
+                'client_id'  => $value->client_id == 0 ? null : $value->client_id,
+                'car_id'    => $value->car_id,
+                'company_id'  => $value->company_id
+            ]);
         }
     }
 }

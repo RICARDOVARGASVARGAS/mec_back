@@ -1,0 +1,107 @@
+[
+    {
+        "id": 1,
+        "name": "FIAT",
+        "company_id": 1,
+        "created_at": "2023-11-23 10:34:16",
+        "updated_at": "2023-11-23 10:34:16"
+    },
+    {
+        "id": 2,
+        "name": "SUBARU",
+        "company_id": 1,
+        "created_at": "2023-11-25 10:55:21",
+        "updated_at": "2023-11-25 10:55:21"
+    },
+    {
+        "id": 3,
+        "name": "Renault",
+        "company_id": 1,
+        "created_at": "2023-11-30 05:04:16",
+        "updated_at": "2023-11-30 05:04:16"
+    },
+    {
+        "id": 4,
+        "name": "TOYOTA",
+        "company_id": 1,
+        "created_at": "2023-11-30 12:21:49",
+        "updated_at": "2023-11-30 12:21:49"
+    },
+    {
+        "id": 5,
+        "name": "KIA",
+        "company_id": 1,
+        "created_at": "2023-12-29 10:42:05",
+        "updated_at": "2023-12-29 10:42:05"
+    },
+    {
+        "id": 6,
+        "name": "CHEVROLET",
+        "company_id": 1,
+        "created_at": "2024-01-10 06:53:00",
+        "updated_at": "2024-01-10 06:53:00"
+    },
+    {
+        "id": 7,
+        "name": "NISSAN",
+        "company_id": 1,
+        "created_at": "2024-01-10 11:23:23",
+        "updated_at": "2024-01-10 11:23:23"
+    },
+    {
+        "id": 8,
+        "name": "MITSUBISHI",
+        "company_id": 1,
+        "created_at": "2024-01-11 10:00:58",
+        "updated_at": "2024-01-11 10:00:58"
+    },
+    {
+        "id": 9,
+        "name": "VOLKSWAGEN",
+        "company_id": 1,
+        "created_at": "2024-01-11 10:20:38",
+        "updated_at": "2024-01-11 10:20:38"
+    },
+    {
+        "id": 10,
+        "name": "AUDI",
+        "company_id": 1,
+        "created_at": "2024-01-16 10:36:22",
+        "updated_at": "2024-01-16 10:36:22"
+    },
+    {
+        "id": 11,
+        "name": "BRILLIANCE",
+        "company_id": 1,
+        "created_at": "2024-02-02 07:11:20",
+        "updated_at": "2024-02-02 07:11:20"
+    },
+    {
+        "id": 12,
+        "name": "MAZDA",
+        "company_id": 1,
+        "created_at": "2024-02-06 07:24:41",
+        "updated_at": "2024-02-06 07:24:41"
+    },
+    {
+        "id": 13,
+        "name": "SUZUKI",
+        "company_id": 1,
+        "created_at": "2024-02-07 12:34:42",
+        "updated_at": "2024-02-07 12:34:42"
+    },
+    {
+        "id": 14,
+        "name": "HYUNDAI",
+        "company_id": 1,
+        "created_at": "2024-02-13 04:36:20",
+        "updated_at": "2024-02-13 04:36:20"
+    },
+    {
+        "id": 15,
+        "name": "HONDA",
+        "company_id": 1,
+        "created_at": "2024-02-16 07:58:33",
+        "updated_at": "2024-02-16 07:58:33"
+    }
+]

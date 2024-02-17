@@ -29,9 +29,9 @@ class PermissionSeeder extends Seeder
                     'show' => $permission[0] . ' ' . $module->show,
                 ]);
 
-                // foreach ($users as $user) {
-                //     $user->permissions()->attach($permission->id);
-                // }
+                foreach ($users as $user) {
+                    $user->permissions()->attach($permission->id);
+                }
             }
         }
     }

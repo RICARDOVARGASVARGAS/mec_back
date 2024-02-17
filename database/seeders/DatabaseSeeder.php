@@ -45,9 +45,34 @@ class DatabaseSeeder extends Seeder
         Storage::createDirectory('messages');
 
 
+        // $this->call([
+        //     
+        // ]);
+
+        // Migrando data
+
         $this->call([
+            CompanySeeder::class,
+            UserSeeder::class,
             PermissionSeeder::class,
+            BrandSeeder::class,
+            ColorSeeder::class,
+            YearSeeder::class,
+            ExampleSeeder::class,
+            ClientSeeder::class,
+            CarSeeder::class,
+            ProductSeeder::class,
+            ServiceSeeder::class,
+            BoxSeeder::class,
+            MovementSeeder::class,
+            SaleSeeder::class,
+            PaymentSeeder::class,
+            ProductSaleSeeder::class,
+            SaleServiceSeeder::class,
         ]);
+
+
+        // Aleatorio
 
         // Company::factory(3)->create();
         // User::factory(10)->create();

@@ -1,0 +1,402 @@
+[
+    {
+        "id": 1,
+        "detail": "ADELANTO",
+        "amount": 100.0,
+        "date_payment": "2023-11-28",
+        "sale_id": 1,
+        "box_id": 2,
+        "created_at": "2023-11-28 07:11:48",
+        "updated_at": "2023-11-28 07:11:48"
+    },
+    {
+        "id": 2,
+        "detail": "",
+        "amount": 255.0,
+        "date_payment": "2023-12-05",
+        "sale_id": 4,
+        "box_id": 3,
+        "created_at": "2023-12-05 10:55:29",
+        "updated_at": "2023-12-05 10:55:29"
+    },
+    {
+        "id": 3,
+        "detail": "ADELANTO PARA REPUESTOS",
+        "amount": 1500.0,
+        "date_payment": "2023-12-04",
+        "sale_id": 5,
+        "box_id": 3,
+        "created_at": "2023-12-06 05:16:24",
+        "updated_at": "2023-12-06 05:16:24"
+    },
+    {
+        "id": 5,
+        "detail": "pagado",
+        "amount": 571.0,
+        "date_payment": "2023-12-13",
+        "sale_id": 3,
+        "box_id": 3,
+        "created_at": "2023-12-13 10:32:29",
+        "updated_at": "2023-12-13 10:32:29"
+    },
+    {
+        "id": 7,
+        "detail": "PAGO DE REPUESTOS",
+        "amount": 252.0,
+        "date_payment": "2023-12-13",
+        "sale_id": 5,
+        "box_id": 3,
+        "created_at": "2023-12-13 13:27:54",
+        "updated_at": "2023-12-13 13:27:54"
+    },
+    {
+        "id": 10,
+        "detail": "PAGO TOTAL",
+        "amount": 180.0,
+        "date_payment": "2024-01-03",
+        "sale_id": 7,
+        "box_id": 3,
+        "created_at": "2024-01-03 12:59:31",
+        "updated_at": "2024-01-03 12:59:31"
+    },
+    {
+        "id": 11,
+        "detail": "ADELANTO",
+        "amount": 200.0,
+        "date_payment": "2024-01-04",
+        "sale_id": 8,
+        "box_id": 3,
+        "created_at": "2024-01-04 04:26:58",
+        "updated_at": "2024-01-04 04:26:58"
+    },
+    {
+        "id": 12,
+        "detail": "PAGO TOTAL",
+        "amount": 110.0,
+        "date_payment": "2024-01-04",
+        "sale_id": 9,
+        "box_id": 4,
+        "created_at": "2024-01-04 05:53:58",
+        "updated_at": "2024-01-04 05:53:58"
+    },
+    {
+        "id": 13,
+        "detail": "PAGO TOTAL",
+        "amount": 99.5,
+        "date_payment": "2024-01-06",
+        "sale_id": 8,
+        "box_id": 3,
+        "created_at": "2024-01-06 07:01:04",
+        "updated_at": "2024-01-06 07:01:04"
+    },
+    {
+        "id": 14,
+        "detail": "PAGO TOTAL",
+        "amount": 110.0,
+        "date_payment": "2024-01-10",
+        "sale_id": 10,
+        "box_id": 3,
+        "created_at": "2024-01-10 07:49:11",
+        "updated_at": "2024-01-10 07:49:11"
+    },
+    {
+        "id": 15,
+        "detail": "ADELANTO",
+        "amount": 200.0,
+        "date_payment": "2024-01-10",
+        "sale_id": 14,
+        "box_id": 3,
+        "created_at": "2024-01-10 13:08:29",
+        "updated_at": "2024-01-10 13:08:29"
+    },
+    {
+        "id": 16,
+        "detail": "PAGADO",
+        "amount": 360.0,
+        "date_payment": "2024-01-11",
+        "sale_id": 16,
+        "box_id": 3,
+        "created_at": "2024-01-11 11:12:58",
+        "updated_at": "2024-01-11 11:12:58"
+    },
+    {
+        "id": 18,
+        "detail": "adelanto",
+        "amount": 300.0,
+        "date_payment": "2024-01-08",
+        "sale_id": 15,
+        "box_id": 3,
+        "created_at": "2024-01-12 06:18:53",
+        "updated_at": "2024-01-12 06:18:53"
+    },
+    {
+        "id": 19,
+        "detail": "",
+        "amount": 840.0,
+        "date_payment": "2024-01-13",
+        "sale_id": 17,
+        "box_id": 3,
+        "created_at": "2024-01-13 07:07:19",
+        "updated_at": "2024-01-13 07:07:19"
+    },
+    {
+        "id": 20,
+        "detail": "FALTA DE MANO DE OBRA",
+        "amount": 482.0,
+        "date_payment": "2024-01-17",
+        "sale_id": 19,
+        "box_id": 3,
+        "created_at": "2024-01-17 13:12:09",
+        "updated_at": "2024-01-17 13:12:09"
+    },
+    {
+        "id": 21,
+        "detail": "PAGO TOTAL",
+        "amount": 1290.0,
+        "date_payment": "2024-01-19",
+        "sale_id": 15,
+        "box_id": 1,
+        "created_at": "2024-01-19 05:03:07",
+        "updated_at": "2024-01-19 05:03:07"
+    },
+    {
+        "id": 22,
+        "detail": "PAGO TOTAL",
+        "amount": 985.0,
+        "date_payment": "2024-01-19",
+        "sale_id": 18,
+        "box_id": 1,
+        "created_at": "2024-01-19 13:56:15",
+        "updated_at": "2024-01-19 13:56:15"
+    },
+    {
+        "id": 23,
+        "detail": "PAGO TOTAL",
+        "amount": 330.0,
+        "date_payment": "2024-01-26",
+        "sale_id": 21,
+        "box_id": 3,
+        "created_at": "2024-01-26 06:24:15",
+        "updated_at": "2024-01-26 06:24:15"
+    },
+    {
+        "id": 24,
+        "detail": "PAGO A YAPE",
+        "amount": 480.0,
+        "date_payment": "2024-02-02",
+        "sale_id": 26,
+        "box_id": 1,
+        "created_at": "2024-02-02 07:19:21",
+        "updated_at": "2024-02-02 07:19:21"
+    },
+    {
+        "id": 25,
+        "detail": "PAGO EN EFECTIVO",
+        "amount": 600.0,
+        "date_payment": "2024-02-02",
+        "sale_id": 26,
+        "box_id": 3,
+        "created_at": "2024-02-02 07:20:35",
+        "updated_at": "2024-02-02 07:20:35"
+    },
+    {
+        "id": 26,
+        "detail": "ADELANTO",
+        "amount": 500.0,
+        "date_payment": "2024-01-30",
+        "sale_id": 25,
+        "box_id": 1,
+        "created_at": "2024-02-02 10:19:05",
+        "updated_at": "2024-02-02 10:19:05"
+    },
+    {
+        "id": 27,
+        "detail": "PAGO TOTAL",
+        "amount": 1319.0,
+        "date_payment": "2024-02-02",
+        "sale_id": 25,
+        "box_id": 3,
+        "created_at": "2024-02-02 10:59:20",
+        "updated_at": "2024-02-02 10:59:20"
+    },
+    {
+        "id": 28,
+        "detail": "ADELANTO",
+        "amount": 900.0,
+        "date_payment": "2024-02-02",
+        "sale_id": 20,
+        "box_id": 3,
+        "created_at": "2024-02-02 11:04:47",
+        "updated_at": "2024-02-02 11:04:47"
+    },
+    {
+        "id": 29,
+        "detail": "",
+        "amount": 395.0,
+        "date_payment": "2024-02-02",
+        "sale_id": 13,
+        "box_id": 3,
+        "created_at": "2024-02-02 11:15:43",
+        "updated_at": "2024-02-02 11:15:43"
+    },
+    {
+        "id": 30,
+        "detail": "",
+        "amount": 200.0,
+        "date_payment": "2024-02-06",
+        "sale_id": 24,
+        "box_id": 3,
+        "created_at": "2024-02-06 05:39:32",
+        "updated_at": "2024-02-06 05:39:32"
+    },
+    {
+        "id": 31,
+        "detail": "",
+        "amount": 1380.0,
+        "date_payment": "2024-02-06",
+        "sale_id": 28,
+        "box_id": 3,
+        "created_at": "2024-02-06 05:39:57",
+        "updated_at": "2024-02-06 05:39:57"
+    },
+    {
+        "id": 32,
+        "detail": "",
+        "amount": 2227.0,
+        "date_payment": "2024-02-06",
+        "sale_id": 22,
+        "box_id": 1,
+        "created_at": "2024-02-06 05:40:45",
+        "updated_at": "2024-02-06 05:40:45"
+    },
+    {
+        "id": 33,
+        "detail": "ADELANTO",
+        "amount": 2000.0,
+        "date_payment": "2024-02-06",
+        "sale_id": 29,
+        "box_id": 3,
+        "created_at": "2024-02-06 09:09:32",
+        "updated_at": "2024-02-06 09:09:32"
+    },
+    {
+        "id": 34,
+        "detail": "",
+        "amount": 470.0,
+        "date_payment": "2024-02-06",
+        "sale_id": 30,
+        "box_id": 3,
+        "created_at": "2024-02-06 09:41:07",
+        "updated_at": "2024-02-06 09:41:07"
+    },
+    {
+        "id": 35,
+        "detail": "",
+        "amount": 100.0,
+        "date_payment": "2024-02-06",
+        "sale_id": 32,
+        "box_id": 3,
+        "created_at": "2024-02-06 13:46:50",
+        "updated_at": "2024-02-06 13:46:50"
+    },
+    {
+        "id": 36,
+        "detail": "",
+        "amount": 662.0,
+        "date_payment": "2024-02-08",
+        "sale_id": 33,
+        "box_id": 3,
+        "created_at": "2024-02-08 13:20:37",
+        "updated_at": "2024-02-08 13:20:37"
+    },
+    {
+        "id": 37,
+        "detail": "",
+        "amount": 1650.0,
+        "date_payment": "2024-02-09",
+        "sale_id": 29,
+        "box_id": 3,
+        "created_at": "2024-02-09 05:03:18",
+        "updated_at": "2024-02-09 05:03:18"
+    },
+    {
+        "id": 38,
+        "detail": "ADELANTO",
+        "amount": 300.0,
+        "date_payment": "2024-02-10",
+        "sale_id": 27,
+        "box_id": 1,
+        "created_at": "2024-02-10 10:34:27",
+        "updated_at": "2024-02-10 10:34:27"
+    },
+    {
+        "id": 39,
+        "detail": "",
+        "amount": 90.0,
+        "date_payment": "2024-02-10",
+        "sale_id": 34,
+        "box_id": 3,
+        "created_at": "2024-02-10 11:18:57",
+        "updated_at": "2024-02-10 11:18:57"
+    },
+    {
+        "id": 40,
+        "detail": "",
+        "amount": 1000.0,
+        "date_payment": "2024-02-10",
+        "sale_id": 36,
+        "box_id": 1,
+        "created_at": "2024-02-10 13:51:22",
+        "updated_at": "2024-02-10 13:51:22"
+    },
+    {
+        "id": 41,
+        "detail": "",
+        "amount": 400.0,
+        "date_payment": "2024-02-11",
+        "sale_id": 36,
+        "box_id": 3,
+        "created_at": "2024-02-10 14:04:38",
+        "updated_at": "2024-02-10 14:04:38"
+    },
+    {
+        "id": 42,
+        "detail": "",
+        "amount": 140.0,
+        "date_payment": "2024-02-13",
+        "sale_id": 39,
+        "box_id": 3,
+        "created_at": "2024-02-13 05:21:36",
+        "updated_at": "2024-02-13 05:21:36"
+    },
+    {
+        "id": 43,
+        "detail": "",
+        "amount": 252.5,
+        "date_payment": "2024-02-14",
+        "sale_id": 38,
+        "box_id": 1,
+        "created_at": "2024-02-14 05:26:18",
+        "updated_at": "2024-02-14 05:26:18"
+    },
+    {
+        "id": 44,
+        "detail": "",
+        "amount": 900.0,
+        "date_payment": "2024-02-16",
+        "sale_id": 35,
+        "box_id": 3,
+        "created_at": "2024-02-16 06:25:59",
+        "updated_at": "2024-02-16 06:25:59"
+    },
+    {
+        "id": 45,
+        "detail": "",
+        "amount": 400.0,
+        "date_payment": "2024-02-16",
+        "sale_id": 41,
+        "box_id": 3,
+        "created_at": "2024-02-16 08:12:10",
+        "updated_at": "2024-02-16 08:12:10"
+    }
+]

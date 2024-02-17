@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "name": "CAMBIO DE DISCO PLAT O COLLARIN",
+        "ticket": "CAMBIO DE DISCO PLAT O COLLARIN",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2023-11-23 10:48:09",
+        "updated_at": "2023-11-23 10:48:09"
+    },
+    {
+        "id": 2,
+        "name": "REPARACION DE MOTOR",
+        "ticket": "REPARACION DE MOTOR",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2023-11-25 10:56:51",
+        "updated_at": "2023-11-25 10:56:51"
+    },
+    {
+        "id": 3,
+        "name": "RECOJO DE REPUESTO",
+        "ticket": "RECOJO DE REPUESTO",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2023-11-30 13:48:16",
+        "updated_at": "2023-11-30 13:48:16"
+    },
+    {
+        "id": 4,
+        "name": "MANO DE OBRA",
+        "ticket": "MANO DE OBRA",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2023-12-16 06:30:10",
+        "updated_at": "2024-01-19 05:26:29"
+    },
+    {
+        "id": 5,
+        "name": "RECOJO DE TRAPECIO",
+        "ticket": "RECOJO D ETRAPECIO",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2023-12-16 06:30:35",
+        "updated_at": "2023-12-16 06:30:35"
+    },
+    {
+        "id": 6,
+        "name": "AFINAMIENTO DE MOTOR",
+        "ticket": "AFINAMIENTO DE MOTOR",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2023-12-29 10:49:30",
+        "updated_at": "2023-12-29 10:49:30"
+    },
+    {
+        "id": 7,
+        "name": "GASOLINA PARA LAVAR",
+        "ticket": "GASOLINA PARA LAVAR",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-03 13:01:19",
+        "updated_at": "2024-01-03 13:01:19"
+    },
+    {
+        "id": 8,
+        "name": "SOLDADURA DE CARTER",
+        "ticket": "SOLDADURA DE CARTER",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-03 13:02:28",
+        "updated_at": "2024-01-03 13:02:28"
+    },
+    {
+        "id": 9,
+        "name": "CAMBIO DE PUENTE POSTERIOR",
+        "ticket": "CAMBIO DE PUENTE POSTEIOR",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-04 05:52:58",
+        "updated_at": "2024-01-04 05:52:58"
+    },
+    {
+        "id": 10,
+        "name": "DESARMADO DE CAJA",
+        "ticket": "DESARMADO DE CAJA",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-04 13:48:50",
+        "updated_at": "2024-01-04 13:48:50"
+    },
+    {
+        "id": 11,
+        "name": "LIMPIEZA Y REGULACION DE FRENOS,CAMBIO DE ACEITE ,FILTROS, ROTULA INFERIOR ,SUPERIOR ,PASTILLA DE FRENO,ALINEAMIENTO DE DIRECCION.",
+        "ticket": "LIMPIEZA Y REGULACION DE FRENOS,CAMBIO DE ACEITE ,FILTROS, ROTULA INFERIOR ,SUPERIOR ,PASTILLA DE FRENO,ALINEAMIENTO DE DIRECCION.",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-06 06:20:39",
+        "updated_at": "2024-01-06 06:20:39"
+    },
+    {
+        "id": 12,
+        "name": "SERVICIO ELECTRICO",
+        "ticket": "SERVICIO ELECTRICO",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-06 06:55:20",
+        "updated_at": "2024-01-06 06:55:20"
+    },
+    {
+        "id": 13,
+        "name": "LIMPIEZA Y REGULACION DE FRENOS,CAMBIO DE ACEITE Y FILTROS,CAMBIO DE RETEN DE FUNDA ,ALINEAMIENTO DE DIRECCION ,ROTACION DE LLANTAS.",
+        "ticket": "LIMPIEZA Y REGULACION DE FRENOS,CAMBIO DE ACEITE Y FILTROS,CAMBIO DE RETEN DE FUNDA ,ALINEAMIENTO DE DIRECCION ,ROTACION DE LLANTAS.",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-06 06:58:25",
+        "updated_at": "2024-02-14 10:01:50"
+    },
+    {
+        "id": 14,
+        "name": "REVISION DE FRENOS",
+        "ticket": "REVISION DE FRENOS",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-10 08:02:39",
+        "updated_at": "2024-01-10 08:03:06"
+    },
+    {
+        "id": 15,
+        "name": "REPARACION DE PARACHOQUE",
+        "ticket": "REPARACION DE PARACHOQUE",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-19 04:56:57",
+        "updated_at": "2024-01-19 05:25:10"
+    },
+    {
+        "id": 16,
+        "name": "CALIBRADO DE TOBERAS",
+        "ticket": "CALIBRADO DE TOBERAS",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-25 10:49:39",
+        "updated_at": "2024-01-25 10:49:39"
+    },
+    {
+        "id": 17,
+        "name": "AIRE ACONDICIONADO",
+        "ticket": "AIRE ACONDICIONADO",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-29 11:03:01",
+        "updated_at": "2024-01-29 11:03:01"
+    },
+    {
+        "id": 18,
+        "name": "DEUDA ANTERIOR",
+        "ticket": "DEUDA ANTERIOR",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-01-29 12:51:04",
+        "updated_at": "2024-01-29 12:51:04"
+    },
+    {
+        "id": 19,
+        "name": "TORNO",
+        "ticket": "TORNO",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-02-02 07:16:24",
+        "updated_at": "2024-02-02 07:16:24"
+    },
+    {
+        "id": 20,
+        "name": "RECTIFICADO DE DISCO (02)",
+        "ticket": "RECTIFICADO DE DISCO (02)",
+        "image": "",
+        "company_id": 1,
+        "created_at": "2024-02-05 05:13:14",
+        "updated_at": "2024-02-05 05:13:14"
+    }
+]

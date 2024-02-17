@@ -2,25 +2,32 @@
 
 namespace Database\Seeders;
 
-use App\Models\Company;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 
 class UserSeeder extends Seeder
 {
     public function run(): void
     {
-        User::create([
-            'names' => 'Ricardo',
-            'surnames' => 'Vargas',
-            'email' => 'admin@gmail.com',
-            'phone' => '123456789',
-            'status' => 'active',
-            'role' => 'admin',
-            'password' => Hash::make('75469478'),
-            'company_id' => Company::all()->random()->id
-        ]);
+        $json = File::get("database/data/users.json");
+        $items = json_decode($json);
+
+        foreach ($items as $key => $value) {
+            User::create([
+                'number' => $value->id,
+                'names' => $value->names,
+                'surnames' => $value->surnames,
+                'phone' => $value->phone,
+                'image' => null,
+                'email' => $value->email,
+                'status' =>  $value->status,
+                'role' => 'user',
+                'password' => $value->password,
+                'company_id' => $value->company_id,
+            ]);
+        }
     }
 }
