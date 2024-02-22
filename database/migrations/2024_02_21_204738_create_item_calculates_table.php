@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('calculates', function (Blueprint $table) {
+        Schema::create('item_calculates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('number')->nullable();
-            $table->foreignId('client_id')->nullable()->constrained();
-            $table->foreignId('car_id')->nullable()->constrained();
-            $table->foreignId('company_id')->nullable()->constrained();
+            $table->integer('amount_item');
+            $table->string('description_item');
+            $table->string('brand_item')->nullable();
+            $table->float('price_item');
+            $table->foreignId('calculate_id')->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('calculates');
+        Schema::dropIfExists('item_calculates');
     }
 };

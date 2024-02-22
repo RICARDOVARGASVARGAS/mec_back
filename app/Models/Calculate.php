@@ -11,42 +11,36 @@ class Calculate extends Model
     use HasFactory, QueryTrait;
 
     protected $fillable = [
-        'number',
-        'client_id',
-        'car_id',
-        'company_id',
+        'number', 'property_calculate', 'driver_calculate', 'ruc_calculate',
+        'dni_calculate', 'phone_calculate', 'cel_property_calculate', 'cel_driver_calculate',
+        'address_calculate', 'plate_calculate', 'engine_calculate', 'chassis_calculate',
+        'brand_calculate', 'model_calculate', 'year_car_calculate', 'color_calculate',
+        'km_calculate', 'observation_calculate', 'company_id'
     ];
 
-    protected $allowFilter = ['number'];
-    protected $allowSort = ['number'];
-    protected $allowIncluded = ['client', 'car', 'company', 'car.client'];
+    protected $allowFilter = [
+        'number', 'property_calculate', 'driver_calculate', 'ruc_calculate',
+        'dni_calculate', 'phone_calculate', 'cel_property_calculate', 'cel_driver_calculate',
+        'address_calculate', 'plate_calculate', 'engine_calculate', 'chassis_calculate',
+        'brand_calculate', 'model_calculate', 'year_car_calculate', 'color_calculate',
+        'km_calculate', 'observation_calculate'
+    ];
+    protected $allowSort = [
+        'number', 'property_calculate', 'driver_calculate', 'ruc_calculate',
+        'dni_calculate', 'phone_calculate', 'cel_property_calculate', 'cel_driver_calculate',
+        'address_calculate', 'plate_calculate', 'engine_calculate', 'chassis_calculate',
+        'brand_calculate', 'model_calculate', 'year_car_calculate', 'color_calculate',
+        'km_calculate', 'observation_calculate'
+    ];
+    protected $allowIncluded = ['company'];
 
-    function client()
+    function itemCalculates()
     {
-        return $this->belongsTo(Client::class);
-    }
-
-    function car()
-    {
-        return $this->belongsTo(Car::class);
+        return $this->hasMany(ItemCalculate::class);
     }
 
     function company()
     {
         return $this->belongsTo(Company::class);
-    }
-
-    function products()
-    {
-        return $this->belongsToMany(Product::class)
-            ->withPivot(['id', 'quantity', 'price_sell'])
-            ->withTimestamps();
-    }
-
-    function services()
-    {
-        return $this->belongsToMany(Service::class)
-            ->withPivot(['id', 'price_service'])
-            ->withTimestamps();
     }
 }
