@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CalculateController;
+use App\Http\Controllers\ItemCalculateController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
@@ -10,9 +11,8 @@ Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
     Route::post('updateCalculate/{calculate}', [CalculateController::class, 'updateCalculate'])->name('updateCalculate');
     Route::delete('deleteCalculate/{calculate}', [CalculateController::class, 'deleteCalculate'])->name('deleteCalculate');
 
-    Route::get('getCalculateDetail/{calculate}', [CalculateController::class, 'getCalculateDetail'])->name('getCalculateDetail');
-    Route::post('addProduct', [CalculateController::class, 'addProduct'])->name('addProduct');
-    Route::post('removeProduct', [CalculateController::class, 'removeProduct'])->name('removeProduct');
-    Route::post('addService', [CalculateController::class, 'addService'])->name('addService');
-    Route::post('removeService', [CalculateController::class, 'removeService'])->name('removeService');
+    // ItemCalculate
+    Route::get('getListItemsCalculate/{calculate}', [ItemCalculateController::class, 'getListItemsCalculate'])->name('getListItemsCalculate');
+    Route::post('registerItemCalculate', [ItemCalculateController::class, 'registerItemCalculate'])->name('registerItemCalculate');
+    Route::delete('deleteItemCalculate/{itemCalculate}', [ItemCalculateController::class, 'deleteItemCalculate'])->name('deleteItemCalculate');
 });
