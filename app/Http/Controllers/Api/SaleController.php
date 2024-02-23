@@ -30,10 +30,10 @@ class SaleController extends Controller
                 $query->where('number', 'like', '%' . $request->search . '%')
                     ->orWhere('entry_date', 'like', '%' . $request->search . '%')
                     ->orWhere('exit_date', 'like', '%' . $request->search . '%')
-                    ->orWhereRelation('client', 'document', 'like', '%' . $request->search . '%')
-                    ->orWhereRelation('client', 'name', 'like', '%' . $request->search . '%')
-                    ->orWhereRelation('client', 'surname', 'like', '%' . $request->search . '%')
-                    ->orWhereRelation('client', 'last_name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('car.client', 'document', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('car.client', 'name', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('car.client', 'surname', 'like', '%' . $request->search . '%')
+                    ->orWhereRelation('car.client', 'last_name', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('car', 'plate', 'like', '%' . $request->search . '%');
             })->orderBy('id', 'desc');
 
