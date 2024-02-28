@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Calculate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,15 +10,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ItemCalculateFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            //
+            'amount_item' => 4,
+            'description_item' => $this->faker->word(),
+            'brand_item' =>  $this->faker->word(),
+            'price_item' => 5.25,
+            'calculate_id' => Calculate::all()->random()->id
         ];
     }
 }
