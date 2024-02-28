@@ -30,7 +30,6 @@ class CompanyControllerTest extends TestCase
         ];
 
         $response = $this->post('/company/registerCompany', $postData);
-        // dd($response);
         $response->assertStatus(200);
         $this->assertDatabaseHas('companies', [
             'name' => 'Mecánica de prueba',
