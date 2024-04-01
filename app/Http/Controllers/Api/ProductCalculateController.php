@@ -11,8 +11,8 @@ class ProductCalculateController extends Controller
 {
     function getListProductsCalculate(Calculate $calculate)
     {
-        $items = $calculate->ProductCalculate;
-        $total = floatval($calculate->ProductCalculate->sum(function ($product) {
+        $items = $calculate->productCalculates;
+        $total = floatval($calculate->productCalculates->sum(function ($product) {
             return $product->amount * $product->price;
         }));
         return response()->json([
