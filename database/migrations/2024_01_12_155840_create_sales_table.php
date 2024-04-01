@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('payment_date')->nullable();
             $table->float('discount')->default(0);
             $table->enum('status', ['pending', 'done', 'cancelled', 'debt'])->default('pending');
+            $table->string('observation')->nullable();
             $table->foreignId('client_id')->nullable()->constrained();
             $table->foreignId('car_id')->nullable()->constrained();
             $table->foreignId('company_id')->nullable()->constrained();
