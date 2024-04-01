@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCalculate extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['amount', 'description', 'brand', 'price', 'calculate_id'];
+
+    public function Calculate()
+    {
+        return $this->belongsTo(Calculate::class);
+    }
 }

@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceCalculate extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['description', 'price', 'calculate_id'];
+
+    public function Calculate()
+    {
+        return $this->belongsTo(Calculate::class);
+    }
 }

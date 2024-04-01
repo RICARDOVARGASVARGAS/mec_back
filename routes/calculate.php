@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\CalculateController;
-use App\Http\Controllers\ItemCalculateController;
+use App\Http\Controllers\Api\ProductCalculateController;
+use App\Http\Controllers\Api\ServiceCalculateController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
@@ -11,8 +12,13 @@ Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
     Route::post('updateCalculate/{calculate}', [CalculateController::class, 'updateCalculate'])->name('updateCalculate');
     Route::delete('deleteCalculate/{calculate}', [CalculateController::class, 'deleteCalculate'])->name('deleteCalculate');
 
-    // ItemCalculate
-    Route::get('getListItemsCalculate/{calculate}', [ItemCalculateController::class, 'getListItemsCalculate'])->name('getListItemsCalculate');
-    Route::post('registerItemCalculate', [ItemCalculateController::class, 'registerItemCalculate'])->name('registerItemCalculate');
-    Route::delete('deleteItemCalculate/{itemCalculate}', [ItemCalculateController::class, 'deleteItemCalculate'])->name('deleteItemCalculate');
+    // ProductCalculate
+    Route::get('getListProductsCalculate/{calculate}', [ProductCalculateController::class, 'getListProductsCalculate'])->name('getListProductsCalculate');
+    Route::post('registerProductCalculate', [ProductCalculateController::class, 'registerProductCalculate'])->name('registerProductCalculate');
+    Route::delete('deleteProductCalculate/{productCalculate}', [ProductCalculateController::class, 'deleteProductCalculate'])->name('deleteProductCalculate');
+
+    // ServiceCalculate
+    Route::get('getListServicesCalculate/{calculate}', [ServiceCalculateController::class, 'getListServicesCalculate'])->name('getListServicesCalculate');
+    Route::post('registerServiceCalculate', [ServiceCalculateController::class, 'registerServiceCalculate'])->name('registerServiceCalculate');
+    Route::delete('deleteServiceCalculate/{serviceCalculate}', [ServiceCalculateController::class, 'deleteServiceCalculate'])->name('deleteServiceCalculate');
 });

@@ -34,9 +34,14 @@ class Calculate extends Model
     ];
     protected $allowIncluded = ['company'];
 
-    function itemCalculates()
+    function productCalculates()
     {
-        return $this->hasMany(ItemCalculate::class);
+        return $this->hasMany(ProductCalculate::class);
+    }
+
+    function serviceCalculates()
+    {
+        return $this->hasMany(ServiceCalculate::class);
     }
 
     function company()
