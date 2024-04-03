@@ -30,6 +30,12 @@ class ProductCalculateController extends Controller
             'brand' => ['nullable', 'string'],
             'price' => ['required', 'numeric'],
             'calculate_id' => ['required', 'exists:calculates,id']
+        ], [], [
+            'calculate_id' => 'Cotización',
+            'amount' => 'Cantidad',
+            'description' => 'Descripción',
+            'brand' => 'Marca',
+            'price' => 'Precio'
         ]);
 
         $item = ProductCalculate::create([

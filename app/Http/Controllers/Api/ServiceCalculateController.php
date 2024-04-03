@@ -12,8 +12,8 @@ class ServiceCalculateController extends Controller
     function getListServicesCalculate(Calculate $calculate)
     {
         $items = $calculate->serviceCalculates;
-        $total = floatval($calculate->serviceCalculates->sum(function ($product) {
-            return $product->amount * $product->price;
+        $total = floatval($calculate->serviceCalculates->sum(function ($service) {
+            return $service->price;
         }));
         return response()->json([
             'calculate' => $calculate,
@@ -25,17 +25,17 @@ class ServiceCalculateController extends Controller
     function registerServiceCalculate(Request $request)
     {
         $request->validate([
-            'amount' => ['required', 'numeric'],
             'description' => ['required', 'string'],
-            'brand' => ['nullable', 'string'],
             'price' => ['required', 'numeric'],
             'calculate_id' => ['required', 'exists:calculates,id']
+        ], [], [
+            'calculate_id' => 'Cotización',
+            'description' => 'Descripción',
+            'price' => 'Precio'
         ]);
 
         $item = ServiceCalculate::create([
-            'amount' => $request->amount,
             'description' => $request->description,
-            'brand' => $request->brand,
             'price' => $request->price,
             'calculate_id' => $request->calculate_id
         ]);

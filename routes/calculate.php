@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth:api', 'throttle:500,1'], function () {
     Route::post('getCalculates', [CalculateController::class, 'getCalculates'])->name('getCalculates');
     Route::post('getCalculate/{calculate}', [CalculateController::class, 'getCalculate'])->name('getCalculate');
+    Route::get('getCalculateDetail/{calculate}', [CalculateController::class, 'getCalculateDetail'])->name('getCalculateDetail');
     Route::post('registerCalculate', [CalculateController::class, 'registerCalculate'])->name('registerCalculate');
     Route::post('updateCalculate/{calculate}', [CalculateController::class, 'updateCalculate'])->name('updateCalculate');
     Route::delete('deleteCalculate/{calculate}', [CalculateController::class, 'deleteCalculate'])->name('deleteCalculate');

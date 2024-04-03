@@ -84,6 +84,27 @@ class CalculateController extends Controller
         return CalculateResource::make($calculate);
     }
 
+    function getCalculateDetail(Calculate $calculate)
+    {
+        $products = $calculate->productCalculates;
+        $totalProducts = floatval($calculate->productCalculates->sum(function ($product) {
+            return $product->amount * $product->price;
+        }));
+        $services = $calculate->serviceCalculates;
+        $totalServices = floatval($calculate->serviceCalculates->sum(function ($service) {
+            return $service->price;
+        }));
+
+        return response()->json([
+            'products' => $products,
+            'totalProducts' => $totalProducts,
+            'services' => $services,
+            'totalServices' => $totalServices,
+            'calculate' => $calculate,
+            'total' => $totalProducts + $totalServices
+        ], 200);
+    }
+
     function updateCalculate(CalculateRequest $request, Calculate $calculate)
     {
         $calculate->update([
