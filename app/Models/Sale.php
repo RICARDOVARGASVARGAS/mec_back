@@ -21,6 +21,7 @@ class Sale extends Model
         'client_id',
         'car_id',
         'company_id',
+        'observation'
     ];
 
     protected $allowFilter = ['km', 'entry_date', 'exit_date'];

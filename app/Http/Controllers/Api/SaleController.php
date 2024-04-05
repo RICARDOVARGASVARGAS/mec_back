@@ -76,6 +76,7 @@ class SaleController extends Controller
             'company_id' => $request->company_id,
             'status' => $request->status,
             'discount' => $request->discount,
+            'observation' => $request->observation
         ]);
 
         return SaleResource::make($sale)->additional([

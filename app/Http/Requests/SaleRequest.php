@@ -22,6 +22,7 @@ class SaleRequest extends FormRequest
             'status' => ['nullable', 'in:pending,done,cancelled,debt'],
             'client_id' => ['nullable', 'exists:clients,id'],
             'car_id' => ['required', 'exists:cars,id'],
+            'observation' => ['nullable'],
             'company_id' => ['required', 'exists:companies,id'],
         ];
     }
