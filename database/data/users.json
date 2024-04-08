@@ -1,50 +1,5 @@
-[
-    {
-        "id": 1,
-        "names": "Admin",
-        "surnames": "Web",
-        "phone": "123456789",
-        "image": "",
-        "email": "admin@gmail.com",
-        "status": "active",
-        "visible": "private",
-        "email_verified_at": "",
-        "password": "$2y$10$jhwp6NDYnnDbatLnCRCigeM4T1hhRoldrdGdoT/aTikP.vtJ4xIY.",
-        "company_id": 1,
-        "remember_token": "",
-        "created_at": "2023-11-22 09:03:50",
-        "updated_at": "2024-01-29 05:14:46"
-    },
-    {
-        "id": 2,
-        "names": "Bree Jacobson",
-        "surnames": "Cleveland",
-        "phone": "+1 (505) 938-6707",
-        "image": "",
-        "email": "sabizevap@mailinator.com",
-        "status": "active",
-        "visible": "public",
-        "email_verified_at": "",
-        "password": "$2y$10$LBC/qfQuM0qho7JlnaetZuK9y/mtoitzBHgmlGZmxOW0mwFyLDB.y",
-        "company_id": 1,
-        "remember_token": "",
-        "created_at": "2023-12-01 06:07:02",
-        "updated_at": "2023-12-01 06:07:02"
-    },
-    {
-        "id": 3,
-        "names": "Yudith",
-        "surnames": "Chiquillan",
-        "phone": "937748642",
-        "image": "",
-        "email": "yudithlaluz@hotmail.com",
-        "status": "active",
-        "visible": "public",
-        "email_verified_at": "",
-        "password": "$2y$10$cHNZORP3ySrhgGuROpXYveH2/6Gd8DYBVXvrD7qaSqeInZm8NcFL2",
-        "company_id": 1,
-        "remember_token": "",
-        "created_at": "2024-01-11 04:46:02",
-        "updated_at": "2024-01-11 04:46:02"
-    }
-]
+[{"id":1, "number":1, "names":"Admin", "surnames":"Web", "phone":"123456789", "image":"", "email":"admin@gmail.com", "status":"active", "role":"user", "email_verified_at":"", "password":"$2y$12$R1l.OzQV4j.n0jjwqv1UpeLhloOQzof0V.QI8jH25SM3pqTmiykRO", "company_id":1, "remember_token":"", "created_at":"2024-02-17 10:22:42", "updated_at":"2024-02-17 05:27:19"},
+ {"id":2, "number":2, "names":"Bree Jacobson", "surnames":"Cleveland", "phone":"+1 (505) 938-6707", "image":"", "email":"sabizevap@mailinator.com", "status":"active", "role":"user", "email_verified_at":"", "password":"$2y$12$kpfUztW4zyjCCG2B9AcrRuwYM5VQyxtNpx0a.oi1ZvJ.uLfTwwCOG", "company_id":1, "remember_token":"", "created_at":"2024-02-17 10:22:42", "updated_at":"2024-02-17 05:27:17"},
+ {"id":3, "number":3, "names":"Yudith", "surnames":"Chiquillan", "phone":"937748642", "image":"users/cf55169b-a5fa-490e-9627-6a5e51fe63b2.jpeg", "email":"yudithlaluz@hotmail.com", "status":"active", "role":"user", "email_verified_at":"", "password":"$2y$12$RBr9U9/P6DOtzoAtm0DEZewQ6jQxvdbM0CiUH00zsPDD7Z9qKPEd6", "company_id":1, "remember_token":"", "created_at":"2024-02-17 10:22:42", "updated_at":"2024-02-25 05:57:15"},
+ {"id":4, "number":4, "names":"Lido", "surnames":"Salazar Cordova", "phone":"972516398", "image":"", "email":"lisac@gmail.com", "status":"active", "role":"user", "email_verified_at":"", "password":"$2y$12$.cqZDNuvnRS34Esh2D25O.kmniBmWu/vVryujCLQW3BYDgHveA1Tu", "company_id":1, "remember_token":"", "created_at":"2024-02-25 05:24:23", "updated_at":"2024-03-08 11:41:39"},
+ {"id":5, "number":5, "names":"meliton", "surnames":"villa arevalo", "phone":"925376621", "image":"", "email":"meliton@gmail.com", "status":"active", "role":"user", "email_verified_at":"", "password":"$2y$12$yiVCYXjTz9cM1ur0CU5ROe0ONOcqatdGe3nUTWgp2InjPKdi.NM2i", "company_id":1, "remember_token":"", "created_at":"2024-03-08 11:47:21", "updated_at":"2024-03-08 11:47:21"}]

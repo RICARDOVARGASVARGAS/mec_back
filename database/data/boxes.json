@@ -1,34 +1,5 @@
-[
-    {
-        "id": 1,
-        "name": "BCP",
-        "image": "",
-        "company_id": 1,
-        "created_at": "2023-11-28 07:07:40",
-        "updated_at": "2023-11-28 07:07:40"
-    },
-    {
-        "id": 2,
-        "name": "AREQUIPA",
-        "image": "",
-        "company_id": 1,
-        "created_at": "2023-11-28 07:09:20",
-        "updated_at": "2023-11-28 07:09:20"
-    },
-    {
-        "id": 3,
-        "name": "CAJA EFECTIVO TALLER",
-        "image": "",
-        "company_id": 1,
-        "created_at": "2023-12-05 10:53:42",
-        "updated_at": "2023-12-05 10:53:42"
-    },
-    {
-        "id": 4,
-        "name": "BCP YUDITH",
-        "image": "",
-        "company_id": 1,
-        "created_at": "2024-01-04 05:53:32",
-        "updated_at": "2024-01-04 05:53:32"
-    }
-]
+[{"id":1, "number":1, "name":"BCP", "image":"", "company_id":1, "created_at":"2024-02-17 10:22:43", "updated_at":"2024-02-17 10:22:43"},
+ {"id":2, "number":2, "name":"AREQUIPA", "image":"", "company_id":1, "created_at":"2024-02-17 10:22:43", "updated_at":"2024-02-17 10:22:43"},
+ {"id":3, "number":3, "name":"CAJA EFECTIVO TALLER", "image":"", "company_id":1, "created_at":"2024-02-17 10:22:43", "updated_at":"2024-02-17 10:22:43"},
+ {"id":4, "number":4, "name":"BCP YUDITH", "image":"", "company_id":1, "created_at":"2024-02-17 10:22:43", "updated_at":"2024-02-17 10:22:43"},
+ {"id":5, "number":5, "name":"Banco de la Naci\u00f3n", "image":"", "company_id":1, "created_at":"2024-04-05 08:13:01", "updated_at":"2024-04-05 08:13:01"}]
