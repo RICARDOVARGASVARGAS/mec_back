@@ -22,9 +22,13 @@ class SaleController extends Controller
             'company_id' => ['required', 'exists:companies,id'],
             'search' => ['nullable', 'string'],
             'perPage' => ['nullable'],
+            'status' => ['nullable', 'string', 'in:pending,done,cancelled,debt']
         ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
 
         $items = Sale::where('company_id', $request->company_id)
+            ->when($request->status, function ($query, $status) {
+                return $query->where('status', $status);
+            })
             ->included()
             ->where(function ($query) use ($request) {
                 $query->where('number', 'like', '%' . $request->search . '%')
