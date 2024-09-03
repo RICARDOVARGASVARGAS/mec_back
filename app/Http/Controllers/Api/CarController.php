@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CarRequest;
+use App\Http\Requests\ListRequest;
 use App\Http\Resources\BrandResource;
 use App\Http\Resources\CarResource;
 use App\Http\Resources\ClientResource;
@@ -24,14 +25,8 @@ use Illuminate\Support\Facades\Storage;
 
 class CarController extends Controller
 {
-    function getCars(Request $request)
+    function getCars(ListRequest $request)
     {
-        $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'search' => ['nullable', 'string'],
-            'perPage' => ['nullable'],
-        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
-
         $items = Car::whereRelation('client', 'company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
@@ -46,9 +41,7 @@ class CarController extends Controller
                     ->orWhereRelation('example', 'name', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('year', 'name', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('color', 'name', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
-
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return CarResource::collection($items);
     }

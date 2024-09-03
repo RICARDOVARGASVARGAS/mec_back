@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ListRequest;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Models\Product;
@@ -12,14 +13,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    function getProducts(Request $request)
+    function getProducts(ListRequest $request)
     {
-        $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'search' => ['nullable', 'string'],
-            'perPage' => ['nullable'],
-        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
-
         $items = Product::where('company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
@@ -27,9 +22,7 @@ class ProductController extends Controller
                     ->orWhere('ticket', 'like', '%' . $request->search . '%')
                     ->orWhere('price_buy', 'like', '%' . $request->search . '%')
                     ->orWhere('price_sell', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
-
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return ProductResource::collection($items);
     }

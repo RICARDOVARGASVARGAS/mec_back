@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ListRequest;
 use App\Http\Requests\YearRequest;
 use App\Http\Resources\YearResource;
 use App\Models\Year;
@@ -10,21 +11,14 @@ use Illuminate\Http\Request;
 
 class YearController extends Controller
 {
-    function getYears(Request $request)
+    function getYears(ListRequest $request)
     {
-        $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'search' => ['nullable', 'string'],
-            'perPage' => ['nullable'],
-        ], [], ['company_id' => 'Mecánica']);
-
         $items = Year::where('company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
-
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+            })->orderBy('id', 'desc')
+            ->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return YearResource::collection($items);
     }

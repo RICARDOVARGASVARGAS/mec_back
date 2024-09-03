@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\ListRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\ModuleResource;
 use App\Http\Resources\UserResource;
@@ -16,20 +16,9 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
-    function getUsers(Request $request)
+    function getUsers(ListRequest $request)
     {
-
-        $request->validate([
-            'search' => 'nullable',
-            'perPage' => 'nullable',
-            'company' => 'required|exists:companies,id'
-        ], [], [
-            'search' => 'Búsqueda',
-            'perPage' => 'Registros por página',
-            'company' => 'Mecánica'
-        ]);
-
-        $items = User::with(['company'])->where('company_id', $request->company)
+        $items = User::with(['company'])->where('company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
                 $query->where('names', 'like', '%' . $request->search . '%')
@@ -37,9 +26,10 @@ class UserController extends Controller
                     ->orWhere('phone', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%');
             })
-            ->orderBy('id', 'desc');
+            ->orderBy('id', 'desc')
+            ->paginate($request->perPage, ['*'], 'page', $request->page);
 
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+
         return UserResource::collection($items);
     }
 

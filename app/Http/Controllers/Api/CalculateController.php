@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CalculateRequest;
+use App\Http\Requests\ListRequest;
 use App\Http\Resources\CalculateResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\ServiceResource;
@@ -13,14 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class CalculateController extends Controller
 {
-    function getCalculates(Request $request)
+    function getCalculates(ListRequest $request)
     {
-        $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'search' => ['nullable', 'string'],
-            'perPage' => ['nullable'],
-        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
-
         $items = Calculate::where('company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
@@ -42,9 +37,7 @@ class CalculateController extends Controller
                     ->orWhere('color_calculate', 'like', '%' . $request->search . '%')
                     ->orWhere('km_calculate', 'like', '%' . $request->search . '%')
                     ->orWhere('observation_calculate', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
-
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return CalculateResource::collection($items);
     }

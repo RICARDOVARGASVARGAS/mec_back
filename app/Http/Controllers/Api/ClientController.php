@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
+use App\Http\Requests\ListRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -12,14 +13,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
-    function getClients(Request $request)
+    function getClients(ListRequest $request)
     {
-        $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'search' => ['nullable', 'string'],
-            'perPage' => ['nullable'],
-        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
-
         $items = Client::where('company_id', $request->company_id)
             ->included()
             ->where(function ($query) use ($request) {
@@ -30,9 +25,7 @@ class ClientController extends Controller
                     ->orWhere('phone', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%')
                     ->orWhere('address', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
-
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return ClientResource::collection($items);
     }

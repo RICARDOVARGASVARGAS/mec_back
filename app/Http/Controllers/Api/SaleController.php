@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ListRequest;
 use App\Http\Requests\SaleRequest;
 use App\Http\Resources\PaymentResource;
 use App\Http\Resources\ProductResource;
@@ -16,15 +17,8 @@ use Illuminate\Support\Facades\Storage;
 
 class SaleController extends Controller
 {
-    function getSales(Request $request)
+    function getSales(ListRequest $request)
     {
-        $request->validate([
-            'company_id' => ['required', 'exists:companies,id'],
-            'search' => ['nullable', 'string'],
-            'perPage' => ['nullable'],
-            'status' => ['nullable', 'string', 'in:pending,done,cancelled,debt']
-        ], [], ['company_id' => 'Mecánica', 'perPage' => 'Por Página', 'search' => 'Búsqueda']);
-
         $items = Sale::where('company_id', $request->company_id)
             ->when($request->status, function ($query, $status) {
                 return $query->where('status', $status);
@@ -39,9 +33,10 @@ class SaleController extends Controller
                     ->orWhereRelation('car.client', 'surname', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('car.client', 'last_name', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('car', 'plate', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc');
+            })->orderBy('id', 'desc')
+            ->paginate($request->perPage, ['*'], 'page', $request->page);
 
-        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+        // $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
 
         return SaleResource::collection($items);
     }
