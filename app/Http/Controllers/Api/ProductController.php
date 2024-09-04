@@ -22,7 +22,9 @@ class ProductController extends Controller
                     ->orWhere('ticket', 'like', '%' . $request->search . '%')
                     ->orWhere('price_buy', 'like', '%' . $request->search . '%')
                     ->orWhere('price_sell', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
+            })->orderBy('id', 'desc');
+
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return ProductResource::collection($items);
     }

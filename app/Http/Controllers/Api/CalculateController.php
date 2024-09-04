@@ -37,7 +37,9 @@ class CalculateController extends Controller
                     ->orWhere('color_calculate', 'like', '%' . $request->search . '%')
                     ->orWhere('km_calculate', 'like', '%' . $request->search . '%')
                     ->orWhere('observation_calculate', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
+            })->orderBy('id', 'desc');
+
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return CalculateResource::collection($items);
     }

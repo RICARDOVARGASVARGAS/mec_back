@@ -25,7 +25,9 @@ class ClientController extends Controller
                     ->orWhere('phone', 'like', '%' . $request->search . '%')
                     ->orWhere('email', 'like', '%' . $request->search . '%')
                     ->orWhere('address', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
+            })->orderBy('id', 'desc');
+
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return ClientResource::collection($items);
     }

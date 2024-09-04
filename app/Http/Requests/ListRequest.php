@@ -16,8 +16,8 @@ class ListRequest extends FormRequest
         return [
             'company_id' => ['required', 'exists:companies,id'],
             'search' => ['nullable', 'string'],
-            'page' => ['required', 'integer', 'min:1'],
-            'perPage' => ['required', 'integer', 'min:1'],
+            'page' => ['nullable', 'integer', 'min:1'],
+            'perPage' => ['nullable', 'integer', 'min:1'],
             'status' => ['nullable', 'string', 'in:pending,done,cancelled,debt']
         ];
     }

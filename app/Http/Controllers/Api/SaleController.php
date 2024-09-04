@@ -33,10 +33,10 @@ class SaleController extends Controller
                     ->orWhereRelation('car.client', 'surname', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('car.client', 'last_name', 'like', '%' . $request->search . '%')
                     ->orWhereRelation('car', 'plate', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc')
-            ->paginate($request->perPage, ['*'], 'page', $request->page);
+            })->orderBy('id', 'desc');
+            // ->paginate($request->perPage, ['*'], 'page', $request->page);
 
-        // $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage);
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return SaleResource::collection($items);
     }

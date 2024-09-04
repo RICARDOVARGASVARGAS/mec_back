@@ -23,7 +23,9 @@ class BoxController extends Controller
             ->included()
             ->where(function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->search . '%');
-            })->orderBy('id', 'desc')->paginate($request->perPage, ['*'], 'page', $request->page);
+            })->orderBy('id', 'desc');
+
+        $items = ($request->perPage == 'all' || $request->perPage == null) ? $items->get() : $items->paginate($request->perPage, ['*'], 'page', $request->page);
 
         return BoxResource::collection($items);
     }
